@@ -1,11 +1,12 @@
 import * as z from "zod";
+import type { JWTPayload } from "jose";
 
 export const SignupFormSchema = z.object({
   name: z
     .string()
     .min(2, { error: "Name must be at least 2 characters long." })
     .trim(),
-  email: z.email({ error: "Please enter a valid email." }).trim(),
+  email: z.email({ error: "Please enter a valid email." }).trim().toLowerCase(),
   password: z
     .string()
     .min(8, { error: "Be at least 8 characters long" })
@@ -27,3 +28,13 @@ export type FormState =
       message?: string;
     }
   | undefined;
+
+export interface SessionPayload extends JWTPayload {
+  userId: string;
+  expiresAt: Date;
+}
+
+export const LoginFormSchema = z.object({
+  email: z.email({ error: "Please enter a valid email." }).trim().toLowerCase(),
+  password: z.string().min(1, { error: "Password is required." }),
+});

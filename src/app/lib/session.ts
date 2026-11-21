@@ -1,11 +1,10 @@
+"use server";
+
 import "server-only";
 import { SignJWT, jwtVerify } from "jose";
-import { SessionPayload } from "@/app/lib/definitions";
 import { cookies } from "next/headers";
-import { decrypt } from "@/app/lib/session";
-import { deleteSession } from "@/app/lib/session";
 import { redirect } from "next/navigation";
-import { db } from "@/app/lib/db";
+import { SessionPayload } from "@/app/lib/definitions";
 
 const secretKey = process.env.SESSION_SECRET;
 const encodedKey = new TextEncoder().encode(secretKey);
@@ -23,9 +22,10 @@ export async function decrypt(session: string | undefined = "") {
     const { payload } = await jwtVerify(session, encodedKey, {
       algorithms: ["HS256"],
     });
-    return payload;
-  } catch (error) {
+    return payload as SessionPayload;
+  } catch {
     console.log("Failed to verify session");
+    return null;
   }
 }
 
@@ -36,7 +36,7 @@ export async function createSession(userId: string) {
 
   cookieStore.set("session", session, {
     httpOnly: true,
-    secure: true,
+    secure: process.env.NODE_ENV === "production",
     expires: expiresAt,
     sameSite: "lax",
     path: "/",
@@ -44,20 +44,24 @@ export async function createSession(userId: string) {
 }
 
 export async function updateSession() {
-  const session = (await cookies()).get("session")?.value;
+  const cookieStore = await cookies();
+  const session = cookieStore.get("session")?.value;
   const payload = await decrypt(session);
 
-  if (!session || !payload) {
+  if (!session || !payload?.userId) {
     return null;
   }
 
-  const expires = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
+  const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
+  const renewedSession = await encrypt({
+    userId: String(payload.userId),
+    expiresAt,
+  });
 
-  const cookieStore = await cookies();
-  cookieStore.set("session", session, {
+  cookieStore.set("session", renewedSession, {
     httpOnly: true,
-    secure: true,
-    expires: expires,
+    secure: process.env.NODE_ENV === "production",
+    expires: expiresAt,
     sameSite: "lax",
     path: "/",
   });
@@ -71,33 +75,4 @@ export async function deleteSession() {
 export async function logout() {
   await deleteSession();
   redirect("/login");
-}
-
-export async function createSession(id: number) {
-  const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
-
-  // 1. Create a session in the database
-  const data = await db
-    .insert(sessions)
-    .values({
-      userId: id,
-      expiresAt,
-    })
-    // Return the session ID
-    .returning({ id: sessions.id });
-
-  const sessionId = data[0].id;
-
-  // 2. Encrypt the session ID
-  const session = await encrypt({ sessionId, expiresAt });
-
-  // 3. Store the session in cookies for optimistic auth checks
-  const cookieStore = await cookies();
-  cookieStore.set("session", session, {
-    httpOnly: true,
-    secure: true,
-    expires: expiresAt,
-    sameSite: "lax",
-    path: "/",
-  });
 }

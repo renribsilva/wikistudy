@@ -34,8 +34,11 @@ export default function SignupForm() {
           </ul>
         </div>
       )}
+
+      {state?.message && <p>{state.message}</p>}
+
       <button disabled={pending} type="submit">
-        Sign Up
+        {pending ? "Signing Up..." : "Sign Up"}
       </button>
     </form>
   );
