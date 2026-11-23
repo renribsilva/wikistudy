@@ -3,9 +3,9 @@
 import * as z from "zod";
 import bcrypt from "bcryptjs";
 import { eq } from "drizzle-orm";
-import { db } from "@/app/lib/db";
-import { users } from "@/app/lib/schema";
-import { createSession } from "@/app/identity/session/session";
+import { db } from "@/app/lib/database/db";
+import { users } from "@/app/lib/database/schema";
+import { createSession } from "@/app/lib/session/session-cryto";
 import { redirect } from "next/navigation";
 import { createEmailBlindIndex, encryptEmail } from "./email-crypto";
 import { FormState, LoginFormSchema, SignupFormSchema } from "./definitions";

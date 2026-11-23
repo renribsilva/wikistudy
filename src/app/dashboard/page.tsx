@@ -1,4 +1,4 @@
-import { getOptionalUser } from "@/app/identity/authorization/dal";
+import { getOptionalUser } from "@/app/lib/authorization/dal";
 
 export default async function DashboardPage() {
   const user = await getOptionalUser();

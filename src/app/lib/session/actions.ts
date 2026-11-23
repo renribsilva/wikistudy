@@ -1,7 +1,7 @@
 "use server";
 
 import { redirect } from "next/navigation";
-import { deleteSession } from "./session";
+import { deleteSession } from "./session-cryto";
 
 /**
  * Encerra a sessão atual removendo o cookie e redireciona o usuário para `/login`.

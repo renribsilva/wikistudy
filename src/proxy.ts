@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { decrypt } from "@/app/identity/session/session";
+import { decrypt } from "@/app/lib/session/session-cryto";
 
 /** Rotas que redirecionam para `/dashboard` quando o usuário já está autenticado. */
 const authRoutes = ["/login", "/signup"];

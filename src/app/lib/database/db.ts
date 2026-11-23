@@ -1,7 +1,7 @@
 import "server-only";
 import { neon } from "@neondatabase/serverless";
 import { drizzle } from "drizzle-orm/neon-http";
-import * as schema from "@/app/lib/schema";
+import * as schema from "@/app/lib/database/schema";
 
 /**
  * Cliente HTTP do Neon configurado com a string de conexão do servidor.

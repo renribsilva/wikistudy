@@ -1,5 +1,5 @@
 import Link from "next/link";
-import SignupForm from "@/app/identity/auth/ui/signup-form";
+import SignupForm from "@/components/tsx/signup-form";
 
 export default function SignupPage() {
   return (

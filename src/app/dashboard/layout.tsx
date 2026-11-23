@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { getOptionalUser } from "@/app/identity/authorization/dal";
-import { logout } from "@/app/identity/session/actions";
+import { getOptionalUser } from "@/app/lib/authorization/dal";
+import { logout } from "@/app/lib/session/actions";
 
 const WIKI_PALETTE = {
   bg: "#0d0d0d",

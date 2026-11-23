@@ -1,7 +1,7 @@
 "use client";
 
 import { useActionState } from "react";
-import { signup } from "@/app/identity/auth/actions";
+import { signup } from "@/app/lib/auth/actions";
 
 export default function SignupForm() {
   const [state, action, pending] = useActionState(signup, undefined);
