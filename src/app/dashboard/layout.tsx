@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { verifySession } from "@/app/lib/dal";
-import { logout } from "@/app/lib/session";
+import { verifySession } from "@/app/identity/authorization/dal";
+import { logout } from "@/app/identity/session/session";
 
 export default async function DashboardLayout({
   children,

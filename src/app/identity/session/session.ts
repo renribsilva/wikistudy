@@ -4,7 +4,7 @@ import "server-only";
 import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { SessionPayload } from "@/app/lib/definitions";
+import { SessionPayload } from "./definitions";
 
 const SESSION_COOKIE_NAME = "session";
 

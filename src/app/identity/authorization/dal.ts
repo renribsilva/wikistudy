@@ -4,10 +4,10 @@ import { cache } from "react";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { eq } from "drizzle-orm";
-import { decrypt } from "@/app/lib/session";
 import { db } from "@/app/lib/db";
 import { users } from "@/app/lib/schema";
-import { decryptEmail } from "@/app/lib/email-crypto";
+import { decrypt } from "../session/session";
+import { decryptEmail } from "../auth/email-crypto";
 
 /**
  * Valida a sessão atual a partir do cookie `session` e retorna o `userId` autenticado.

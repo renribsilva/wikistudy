@@ -1,5 +1,4 @@
 import * as z from "zod";
-import type { JWTPayload } from "jose";
 
 /**
  * Schema de validação para o formulário de cadastro (`SignupFormSchema`).
@@ -34,6 +33,21 @@ export const SignupFormSchema = z.object({
 });
 
 /**
+ * Schema de validação para o formulário de login (`LoginFormSchema`).
+ *
+ * Valida e normaliza o e-mail e garante que a senha não esteja vazia antes da
+ * autenticação.
+ */
+export const LoginFormSchema = z.object({
+  email: z
+    .string()
+    .trim()
+    .toLowerCase()
+    .pipe(z.email({ error: "Por favor, insira um e-mail válido." })),
+  password: z.string().min(1, { error: "A senha é obrigatória." }),
+});
+
+/**
  * Estado retornado por Server Actions de formulário de autenticação.
  *
  * Contém erros de validação por campo (`errors`), uma mensagem geral (`message`)
@@ -56,22 +70,3 @@ export type FormState =
  * Estende `JWTPayload` do `jose` para incluir o identificador do usuário
  * autenticado (`userId`).
  */
-export interface SessionPayload extends JWTPayload {
-  /** Identificador único do usuário autenticado. */
-  userId: string;
-}
-
-/**
- * Schema de validação para o formulário de login (`LoginFormSchema`).
- *
- * Valida e normaliza o e-mail e garante que a senha não esteja vazia antes da
- * autenticação.
- */
-export const LoginFormSchema = z.object({
-  email: z
-    .string()
-    .trim()
-    .toLowerCase()
-    .pipe(z.email({ error: "Por favor, insira um e-mail válido." })),
-  password: z.string().min(1, { error: "A senha é obrigatória." }),
-});

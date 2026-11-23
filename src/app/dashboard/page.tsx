@@ -1,5 +1,5 @@
-import { verifySession } from "@/app/lib/dal";
-import { getProfileDTO } from "@/app/lib/dto";
+import { verifySession } from "@/app/identity/authorization/dal";
+import { getProfileDTO } from "@/app/identity/authorization/dto";
 
 export default async function DashboardPage() {
   // Deduplicado por request via React cache() em verifySession / getUser

@@ -1,9 +1,9 @@
 import "server-only";
 import { eq } from "drizzle-orm";
-import { getUser } from "@/app/lib/dal";
 import { db } from "@/app/lib/db";
 import { users } from "@/app/lib/schema";
-import { decryptEmail } from "@/app/lib/email-crypto";
+import { getUser } from "./dal";
+import { decryptEmail } from "../auth/email-crypto";
 
 /**
  * Representa o usuário autenticado que está solicitando a visualização de um perfil.

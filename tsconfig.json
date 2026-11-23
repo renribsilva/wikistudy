@@ -29,7 +29,7 @@
     "**/*.mts",
     "**/*.ts",
     "**/*.tsx",
-    "src/app/dashboard"
+    "src/app/identity/dashboarddashboard"
   ],
   "exclude": ["node_modules"]
 }

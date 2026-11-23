@@ -3,16 +3,12 @@
 import * as z from "zod";
 import bcrypt from "bcryptjs";
 import { eq } from "drizzle-orm";
-import {
-  SignupFormSchema,
-  LoginFormSchema,
-  FormState,
-} from "@/app/lib/definitions";
 import { db } from "@/app/lib/db";
 import { users } from "@/app/lib/schema";
-import { createSession } from "../lib/session";
+import { createSession } from "../session/session";
 import { redirect } from "next/navigation";
-import { createEmailBlindIndex, encryptEmail } from "../lib/email-crypto";
+import { createEmailBlindIndex, encryptEmail } from "./email-crypto";
+import { FormState, LoginFormSchema, SignupFormSchema } from "./definitions";
 
 /**
  * Server Action responsável pelo cadastro de novos usuários.
