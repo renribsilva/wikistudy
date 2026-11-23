@@ -5,7 +5,7 @@ import bcrypt from "bcryptjs";
 import { eq } from "drizzle-orm";
 import { db } from "@/app/lib/db";
 import { users } from "@/app/lib/schema";
-import { createSession } from "../session/session";
+import { createSession } from "@/app/identity/session/session";
 import { redirect } from "next/navigation";
 import { createEmailBlindIndex, encryptEmail } from "./email-crypto";
 import { FormState, LoginFormSchema, SignupFormSchema } from "./definitions";

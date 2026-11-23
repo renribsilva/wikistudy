@@ -5,8 +5,8 @@ import { redirect } from "next/navigation";
 import { eq } from "drizzle-orm";
 import { db } from "@/app/lib/db";
 import { users } from "@/app/lib/schema";
-import { decrypt } from "../session/session";
-import { decryptEmail } from "../auth/email-crypto";
+import { decrypt } from "@/app/identity/session/session";
+import { decryptEmail } from "@/app/identity/auth/email-crypto";
 
 /**
  * Valida a sessão atual a partir do cookie `session` e retorna o `userId` autenticado.

@@ -3,7 +3,7 @@ import { eq } from "drizzle-orm";
 import { db } from "@/app/lib/db";
 import { users } from "@/app/lib/schema";
 import { getUser } from "./dal";
-import { decryptEmail } from "../auth/email-crypto";
+import { decryptEmail } from "@/app/identity/auth/email-crypto";
 
 /**
  * Representa o usuário autenticado que está solicitando a visualização de um perfil.
