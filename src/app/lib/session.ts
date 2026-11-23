@@ -6,63 +6,69 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { SessionPayload } from "@/app/lib/definitions";
 
-const secretKey = process.env.SESSION_SECRET;
-const encodedKey = new TextEncoder().encode(secretKey);
+const SESSION_COOKIE_NAME = "session";
 
 /**
- * Assina e gera um token JWT (HS256) contendo os dados da sessão.
+ * Recupera, valida e codifica a chave secreta de sessão (`SESSION_SECRET`).
  *
- * @param payload - Dados que serão embarcados no token de sessão.
- * @returns Token JWT assinado em formato string.
+ * Exige que `SESSION_SECRET` esteja definida e possua ao menos 32 caracteres.
  *
- * @remarks
- * O token não define expiração automática (`exp`) e registra apenas o
- * carimbo de emissão (`iat`). Garanta que `SESSION_SECRET` esteja configurado
- * com um valor forte no ambiente server-side.
+ * @returns `Uint8Array` codificado em UTF-8 para assinatura e verificação JWT.
+ */
+function getEncodedKey(): Uint8Array {
+  const secretKey = process.env.SESSION_SECRET?.trim();
+  if (!secretKey || secretKey.length < 32) {
+    throw new Error(
+      "SESSION_SECRET deve estar configurada e ter pelo menos 32 caracteres.",
+    );
+  }
+  return new TextEncoder().encode(secretKey);
+}
+
+/**
+ * Assina e gera um token JWT (`HS256`) com o payload da sessão e `iat`.
+ *
+ * Não define expiração explícita (`exp`).
+ *
+ * @param payload - Dados embarcados na sessão (inclui `userId`).
+ * @returns Token JWT assinado.
  */
 export async function encrypt(payload: SessionPayload) {
   return new SignJWT(payload)
     .setProtectedHeader({ alg: "HS256" })
     .setIssuedAt()
-    .sign(encodedKey);
+    .sign(getEncodedKey());
 }
 
 /**
- * Valida a assinatura de um JWT de sessão e retorna seu payload.
+ * Verifica a assinatura e o algoritmo (`HS256`) de um token JWT de sessão.
  *
- * @param session - Token JWT recuperado do cookie de sessão.
- * @returns O `SessionPayload` decodificado se válido, ou `null` em caso de falha.
- *
- * @remarks
- * Falhas de assinatura ou token malformado são capturadas silenciosamente e
- * retornam `null` para facilitar o tratamento em guards/Server Actions.
+ * @param session - Valor do cookie `session` a ser verificado.
+ * @returns Payload tipado (`SessionPayload`) se válido, ou `null` em caso de falha/ausência.
  */
 export async function decrypt(session: string | undefined = "") {
+  if (!session) return null;
+
   try {
-    const { payload } = await jwtVerify(session, encodedKey, {
+    const { payload } = await jwtVerify(session, getEncodedKey(), {
       algorithms: ["HS256"],
     });
     return payload as SessionPayload;
   } catch {
-    console.log("Failed to verify session");
     return null;
   }
 }
 
 /**
- * Cria a sessão do usuário e grava o cookie `session` no navegador.
+ * Cria a sessão do usuário e grava o cookie `session` com flags de segurança.
  *
- * @param userId - Identificador único do usuário autenticado.
- *
- * @remarks
- * Como não há `expires` ou `maxAge` definidos, o cookie funciona como cookie
- * de sessão do navegador (`httpOnly`, `sameSite: "lax"`, `secure` em produção).
+ * @param userId - Identificador único do usuário autenticado (UUIDv7 em `string`).
  */
 export async function createSession(userId: string) {
   const session = await encrypt({ userId });
   const cookieStore = await cookies();
 
-  cookieStore.set("session", session, {
+  cookieStore.set(SESSION_COOKIE_NAME, session, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax",
@@ -71,17 +77,16 @@ export async function createSession(userId: string) {
 }
 
 /**
- * Reemite o token de sessão com um novo `iat` e atualiza o cookie `session`.
+ * Reemite o JWT de sessão com um novo `iat` e atualiza o cookie `session`.
  *
- * @returns `null` se não houver sessão válida para renovar; caso contrário, atualiza o cookie.
+ * Deve ser chamada apenas em contextos mutáveis de cookies (Server Actions,
+ * Route Handlers ou Proxy/Middleware).
  *
- * @remarks
- * Só deve ser chamada em contextos onde o Next.js permite modificar cookies
- * (como Server Actions ou Route Handlers), não dentro de Server Components.
+ * @returns `null` caso não exista sessão válida para renovar.
  */
 export async function updateSession() {
   const cookieStore = await cookies();
-  const session = cookieStore.get("session")?.value;
+  const session = cookieStore.get(SESSION_COOKIE_NAME)?.value;
   const payload = await decrypt(session);
 
   if (!session || !payload?.userId) {
@@ -92,7 +97,7 @@ export async function updateSession() {
     userId: String(payload.userId),
   });
 
-  cookieStore.set("session", renewedSession, {
+  cookieStore.set(SESSION_COOKIE_NAME, renewedSession, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax",
@@ -101,19 +106,18 @@ export async function updateSession() {
 }
 
 /**
- * Remove o cookie `session` encerrando a sessão no navegador.
+ * Remove o cookie `session` do navegador.
  */
 export async function deleteSession() {
   const cookieStore = await cookies();
-  cookieStore.delete("session");
+  cookieStore.delete(SESSION_COOKIE_NAME);
 }
 
 /**
- * Encerra a sessão atual e redireciona o usuário para `/login`.
+ * Encerra a sessão atual removendo o cookie e redireciona o usuário para `/login`.
  *
- * @remarks
- * Chama `redirect("/login")`, que lança uma exceção interna do Next.js para
- * interromper a execução e realizar o redirecionamento.
+ * O `redirect` é executado após `deleteSession()` fora de `try/catch` para
+ * respeitar o mecanismo de redirecionamento do Next.js.
  */
 export async function logout() {
   await deleteSession();

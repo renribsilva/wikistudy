@@ -1,13 +1,11 @@
-import { getUser } from "@/app/lib/dal";
+import { verifySession } from "@/app/lib/dal";
 import { getProfileDTO } from "@/app/lib/dto";
 
 export default async function DashboardPage() {
-  // 1. DAL garante sessão válida e retorna o usuário logado
-  const currentUser = await getUser();
-  if (!currentUser) return null;
+  // Deduplicado por request via React cache() em verifySession / getUser
+  const session = await verifySession();
+  const profile = await getProfileDTO(session.userId);
 
-  // 2. DTO aplica as regras de visibilidade para esse usuário
-  const profile = await getProfileDTO(currentUser.id);
   if (!profile) return null;
 
   return (

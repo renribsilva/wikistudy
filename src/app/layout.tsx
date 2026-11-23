@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "App",
-  description: "Sistema de autenticação",
+  title: "WikiStudy",
+  description: "WikiStudy — Sistema de autenticação e estudos",
 };
 
 export default function RootLayout({

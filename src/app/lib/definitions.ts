@@ -69,8 +69,9 @@ export interface SessionPayload extends JWTPayload {
  */
 export const LoginFormSchema = z.object({
   email: z
-    .email({ error: "Por favor, insira um e-mail válido." })
+    .string()
     .trim()
-    .toLowerCase(),
+    .toLowerCase()
+    .pipe(z.email({ error: "Por favor, insira um e-mail válido." })),
   password: z.string().min(1, { error: "A senha é obrigatória." }),
 });
