@@ -21,43 +21,40 @@ export async function GET() {
     return new ImageResponse(
       <div
         style={{
-          height: "630px",
-          width: "1200px",
+          width: "100%",
+          height: "100%",
           display: "flex",
           flexDirection: "row",
           backgroundColor: palette.bg,
           fontFamily: "sans-serif",
         }}
       >
-        {/* Faixa lateral esquerda com dimensões fixas */}
+        {/* Faixa lateral esquerda */}
         <div
           style={{
             display: "flex",
             flexDirection: "column",
             width: "10px",
-            height: "630px",
+            height: "100%",
+            flexShrink: 0,
           }}
         >
           <div
             style={{
-              width: "10px",
-              height: "210px",
+              display: "flex",
+              flex: 1,
               backgroundColor: palette.orange,
             }}
           />
           <div
             style={{
-              width: "10px",
-              height: "210px",
+              display: "flex",
+              flex: 1,
               backgroundColor: palette.purple,
             }}
           />
           <div
-            style={{
-              width: "10px",
-              height: "210px",
-              backgroundColor: palette.blue,
-            }}
+            style={{ display: "flex", flex: 1, backgroundColor: palette.blue }}
           />
         </div>
 
@@ -67,9 +64,9 @@ export async function GET() {
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-between",
-            width: "1190px",
-            height: "630px",
-            padding: "60px 72px",
+            flex: 1,
+            height: "100%",
+            padding: "56px 68px",
           }}
         >
           {/* Cabeçalho */}
@@ -83,29 +80,26 @@ export async function GET() {
               paddingBottom: "20px",
             }}
           >
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "10px",
-              }}
-            >
-              <span
+            <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+              <div
                 style={{
+                  display: "flex",
                   width: "10px",
                   height: "10px",
                   backgroundColor: palette.orange,
                 }}
               />
-              <span
+              <div
                 style={{
+                  display: "flex",
                   width: "10px",
                   height: "10px",
                   backgroundColor: palette.purple,
                 }}
               />
-              <span
+              <div
                 style={{
+                  display: "flex",
                   width: "10px",
                   height: "10px",
                   backgroundColor: palette.green,
@@ -125,8 +119,10 @@ export async function GET() {
               </span>
             </div>
 
-            <span
+            <div
               style={{
+                display: "flex",
+                alignItems: "center",
                 fontSize: "13px",
                 color: palette.orange,
                 backgroundColor: "#1f140d",
@@ -138,7 +134,7 @@ export async function GET() {
               }}
             >
               Vídeos Grátis • YouTube
-            </span>
+            </div>
           </div>
 
           {/* Centro */}
@@ -156,7 +152,7 @@ export async function GET() {
               style={{
                 display: "flex",
                 flexDirection: "column",
-                width: "720px",
+                flex: 1,
               }}
             >
               <div
@@ -169,6 +165,7 @@ export async function GET() {
               >
                 <div
                   style={{
+                    display: "flex",
                     width: "36px",
                     height: "3px",
                     backgroundColor: palette.purple,
@@ -194,7 +191,7 @@ export async function GET() {
                   color: palette.textPrimary,
                   margin: "0 0 14px 0",
                   letterSpacing: "-0.035em",
-                  lineHeight: 1,
+                  lineHeight: 1.05,
                 }}
               >
                 wikistudy
@@ -220,6 +217,7 @@ export async function GET() {
                 flexDirection: "column",
                 gap: "12px",
                 width: "260px",
+                flexShrink: 0,
               }}
             >
               <div
@@ -291,41 +289,46 @@ export async function GET() {
                   display: "flex",
                   flexDirection: "row",
                   gap: "6px",
-                  width: "260px",
+                  width: "100%",
                   marginTop: "2px",
                 }}
               >
-                <span
+                <div
                   style={{
-                    width: "47px",
+                    display: "flex",
+                    flex: 1,
                     height: "6px",
                     backgroundColor: palette.orange,
                   }}
                 />
-                <span
+                <div
                   style={{
-                    width: "47px",
+                    display: "flex",
+                    flex: 1,
                     height: "6px",
                     backgroundColor: palette.purple,
                   }}
                 />
-                <span
+                <div
                   style={{
-                    width: "47px",
+                    display: "flex",
+                    flex: 1,
                     height: "6px",
                     backgroundColor: palette.blue,
                   }}
                 />
-                <span
+                <div
                   style={{
-                    width: "47px",
+                    display: "flex",
+                    flex: 1,
                     height: "6px",
                     backgroundColor: palette.green,
                   }}
                 />
-                <span
+                <div
                   style={{
-                    width: "48px",
+                    display: "flex",
+                    flex: 1,
                     height: "6px",
                     backgroundColor: palette.pink,
                   }}
