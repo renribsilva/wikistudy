@@ -1,7 +1,6 @@
 import "server-only";
 import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 import { SessionPayload } from "./definitions";
 
 const SESSION_COOKIE_NAME = "session";
@@ -51,11 +50,6 @@ export async function decrypt(session: string | undefined = "") {
     const { payload } = await jwtVerify(session, getEncodedKey(), {
       algorithms: ["HS256"],
     });
-
-    if (typeof payload.userId !== "string" || payload.userId.length === 0) {
-      return null;
-    }
-
     return payload as SessionPayload;
   } catch {
     return null;
@@ -114,15 +108,4 @@ export async function updateSession() {
 export async function deleteSession() {
   const cookieStore = await cookies();
   cookieStore.delete(SESSION_COOKIE_NAME);
-}
-
-/**
- * Encerra a sessão atual removendo o cookie e redireciona o usuário para `/login`.
- *
- * O `redirect` é executado após `deleteSession()` fora de `try/catch` para
- * respeitar o mecanismo de redirecionamento do Next.js.
- */
-export async function logout() {
-  await deleteSession();
-  redirect("/");
 }
