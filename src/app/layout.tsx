@@ -11,35 +11,44 @@ const ubuntu = Ubuntu({
   display: "swap",
 });
 
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  (process.env.VERCEL_URL
+    ? `https://${process.env.VERCEL_URL}`
+    : "https://wikistudy.vercel.app");
+
+const OG_IMAGE_URL = `${SITE_URL}/api/og`;
+
 export async function generateMetadata(): Promise<Metadata> {
+  const title = "WikiStudy — Plataforma de Estudo, Organização e Cronograma";
+  const description =
+    "Plataforma de estudo, organização e cronograma com organização de links de vídeos gratuitos do YouTube.";
+
   return {
-    metadataBase: new URL("https://wikistudy.com.br"),
-    title: "WikiStudy — Seu Mapa de Aulas Grátis & Cronograma",
-    description:
-      "Monte seu ritmo, organize aulas abertas do YouTube sem perder o fio da meada e mantenha seu cronograma sob controle.",
+    metadataBase: new URL(SITE_URL),
+    title,
+    description,
     icons: {
       icon: "data:;base64,iVBORw0KGgo=",
     },
     twitter: {
       card: "summary_large_image",
-      title: "WikiStudy — Seu Mapa de Aulas Grátis & Cronograma",
-      description:
-        "Monte seu ritmo, organize aulas abertas do YouTube sem perder o fio da meada e mantenha seu cronograma sob controle.",
-      images: ["/api/og"],
+      title,
+      description,
+      images: [OG_IMAGE_URL],
     },
     openGraph: {
-      title: "WikiStudy — Seu Mapa de Aulas Grátis & Cronograma",
-      description:
-        "Monte seu ritmo, organize aulas abertas do YouTube sem perder o fio da meada e mantenha seu cronograma sob controle.",
+      title,
+      description,
       type: "website",
-      url: "https://wikistudy.com.br",
+      url: SITE_URL,
       siteName: "WikiStudy",
       images: [
         {
-          url: "/api/og",
+          url: OG_IMAGE_URL,
           width: 1200,
           height: 630,
-          alt: "WikiStudy — Aulas gratuitas do YouTube, cronograma e foco no que importa.",
+          alt: "WikiStudy — Plataforma de estudo, organização e cronograma com vídeos gratuitos do YouTube.",
         },
       ],
     },
