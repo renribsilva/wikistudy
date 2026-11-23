@@ -1,9 +1,5 @@
 import "server-only";
-import { eq } from "drizzle-orm";
-import { db } from "@/app/lib/db";
-import { users } from "@/app/lib/schema";
 import { getUser } from "./dal";
-import { decryptEmail } from "@/app/identity/auth/email-crypto";
 
 /**
  * Representa o usuário autenticado que está solicitando a visualização de um perfil.
@@ -34,18 +30,6 @@ function canSeeEmail(viewer: Viewer, profileUserId: string) {
 }
 
 /**
- * Descriptografa o e-mail com segurança, retornando `null` em caso de falha.
- */
-function safeDecryptEmail(encryptedEmail: string): string | null {
-  try {
-    return decryptEmail(encryptedEmail);
-  } catch {
-    console.error("Failed to decrypt profile email");
-    return null;
-  }
-}
-
-/**
  * Retorna o DTO seguro do perfil do usuário autenticado a partir do `targetUserId` (UUIDv7).
  *
  * Valida a sessão via `getUser()`, garante que o usuário só acesse o próprio perfil,
@@ -60,23 +44,9 @@ export async function getProfileDTO(targetUserId: string) {
   if (!currentUser) return null;
   if (currentUser.id !== targetUserId) return null;
 
-  const data = await db.query.users.findMany({
-    where: eq(users.id, targetUserId),
-    columns: {
-      id: true,
-      name: true,
-      emailEncrypted: true,
-    },
-  });
-
-  const profile = data[0];
-  if (!profile) return null;
-
   return {
-    id: profile.id,
-    name: canSeeName(currentUser) ? profile.name : null,
-    email: canSeeEmail(currentUser, profile.id)
-      ? safeDecryptEmail(profile.emailEncrypted)
-      : null,
+    id: currentUser.id,
+    name: canSeeName(currentUser) ? currentUser.name : null,
+    email: canSeeEmail(currentUser, currentUser.id) ? currentUser.email : null,
   };
 }

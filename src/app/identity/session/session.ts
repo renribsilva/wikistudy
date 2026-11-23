@@ -1,5 +1,3 @@
-"use server";
-
 import "server-only";
 import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
@@ -126,5 +124,5 @@ export async function deleteSession() {
  */
 export async function logout() {
   await deleteSession();
-  redirect("/login");
+  redirect("/");
 }
