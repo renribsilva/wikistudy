@@ -34,6 +34,18 @@ function canSeeEmail(viewer: Viewer, profileUserId: string) {
 }
 
 /**
+ * Descriptografa o e-mail com segurança, retornando `null` em caso de falha.
+ */
+function safeDecryptEmail(encryptedEmail: string): string | null {
+  try {
+    return decryptEmail(encryptedEmail);
+  } catch {
+    console.error("Failed to decrypt profile email");
+    return null;
+  }
+}
+
+/**
  * Retorna o DTO seguro do perfil do usuário autenticado a partir do `targetUserId` (UUIDv7).
  *
  * Valida a sessão via `getUser()`, garante que o usuário só acesse o próprio perfil,
@@ -64,7 +76,7 @@ export async function getProfileDTO(targetUserId: string) {
     id: profile.id,
     name: canSeeName(currentUser) ? profile.name : null,
     email: canSeeEmail(currentUser, profile.id)
-      ? decryptEmail(profile.emailEncrypted)
+      ? safeDecryptEmail(profile.emailEncrypted)
       : null,
   };
 }

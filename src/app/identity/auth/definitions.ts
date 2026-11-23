@@ -1,25 +1,29 @@
 import * as z from "zod";
 
+const MAX_NAME_LENGTH = 100;
+const MAX_EMAIL_LENGTH = 254;
+
 /**
  * Schema de validação para o formulário de cadastro (`SignupFormSchema`).
  *
  * Valida nome, e-mail normalizado e senha forte antes do processamento no
  * servidor.
- *
- * @remarks
- * - `email` é aparado (`trim()`) e convertido para minúsculas (`toLowerCase()`).
- * - `password` exige no mínimo 8 caracteres, ao menos uma letra, um número e um
- *   caractere especial.
  */
 export const SignupFormSchema = z.object({
   name: z
     .string()
+    .trim()
     .min(2, { error: "O nome deve ter pelo menos 2 caracteres." })
-    .trim(),
+    .max(MAX_NAME_LENGTH, {
+      error: `O nome deve ter no máximo ${MAX_NAME_LENGTH} caracteres.`,
+    }),
   email: z
     .string()
     .trim()
     .toLowerCase()
+    .max(MAX_EMAIL_LENGTH, {
+      error: `O e-mail deve ter no máximo ${MAX_EMAIL_LENGTH} caracteres.`,
+    })
     .pipe(z.email({ error: "Por favor, insira um e-mail válido." })),
   password: z
     .string()
@@ -43,15 +47,15 @@ export const LoginFormSchema = z.object({
     .string()
     .trim()
     .toLowerCase()
+    .max(MAX_EMAIL_LENGTH, {
+      error: `O e-mail deve ter no máximo ${MAX_EMAIL_LENGTH} caracteres.`,
+    })
     .pipe(z.email({ error: "Por favor, insira um e-mail válido." })),
   password: z.string().min(1, { error: "A senha é obrigatória." }),
 });
 
 /**
  * Estado retornado por Server Actions de formulário de autenticação.
- *
- * Contém erros de validação por campo (`errors`), uma mensagem geral (`message`)
- * ou `undefined` quando ainda não houve submissão/erro.
  */
 export type FormState =
   | {
@@ -63,10 +67,3 @@ export type FormState =
       message?: string;
     }
   | undefined;
-
-/**
- * Payload embarcado no JWT de sessão da aplicação.
- *
- * Estende `JWTPayload` do `jose` para incluir o identificador do usuário
- * autenticado (`userId`).
- */

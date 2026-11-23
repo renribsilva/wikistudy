@@ -1,48 +1,75 @@
 "use client";
 
 import { useActionState } from "react";
-import { signup } from "../actions";
+import { signup } from "@/app/identity/auth/actions";
 
 export default function SignupForm() {
   const [state, action, pending] = useActionState(signup, undefined);
 
   return (
-    <form action={action}>
+    <form action={action} className="space-y-4">
       <div>
-        <label htmlFor="name">Nome</label>
-        <input id="name" name="name" placeholder="Seu nome" />
+        <label htmlFor="name" className="block text-sm mb-1">
+          Nome
+        </label>
+        <input
+          id="name"
+          name="name"
+          placeholder="Seu nome"
+          className="w-full border rounded px-3 py-2"
+        />
+        {state?.errors?.name && (
+          <p className="text-sm text-red-600 mt-1">{state.errors.name[0]}</p>
+        )}
       </div>
-      {state?.errors?.name && <p>{state.errors.name}</p>}
 
       <div>
-        <label htmlFor="email">E-mail</label>
+        <label htmlFor="email" className="block text-sm mb-1">
+          E-mail
+        </label>
         <input
           id="email"
           name="email"
           type="email"
           placeholder="seu@email.com"
+          className="w-full border rounded px-3 py-2"
         />
+        {state?.errors?.email && (
+          <p className="text-sm text-red-600 mt-1">{state.errors.email[0]}</p>
+        )}
       </div>
-      {state?.errors?.email && <p>{state.errors.email}</p>}
 
       <div>
-        <label htmlFor="password">Senha</label>
-        <input id="password" name="password" type="password" />
+        <label htmlFor="password" className="block text-sm mb-1">
+          Senha
+        </label>
+        <input
+          id="password"
+          name="password"
+          type="password"
+          className="w-full border rounded px-3 py-2"
+        />
+        {state?.errors?.password && (
+          <div className="text-sm text-red-600 mt-1">
+            <p>A senha deve:</p>
+            <ul className="list-disc list-inside">
+              {state.errors.password.map((error) => (
+                <li key={error}>{error}</li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
-      {state?.errors?.password && (
-        <div>
-          <p>A senha deve:</p>
-          <ul>
-            {state.errors.password.map((error) => (
-              <li key={error}>- {error}</li>
-            ))}
-          </ul>
-        </div>
+
+      {state?.message && (
+        <p className="text-sm text-red-600">{state.message}</p>
       )}
 
-      {state?.message && <p>{state.message}</p>}
-
-      <button disabled={pending} type="submit">
+      <button
+        disabled={pending}
+        type="submit"
+        className="w-full border rounded py-2 font-medium disabled:opacity-50"
+      >
         {pending ? "Cadastrando..." : "Cadastrar"}
       </button>
     </form>

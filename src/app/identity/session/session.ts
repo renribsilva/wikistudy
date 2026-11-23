@@ -53,6 +53,11 @@ export async function decrypt(session: string | undefined = "") {
     const { payload } = await jwtVerify(session, getEncodedKey(), {
       algorithms: ["HS256"],
     });
+
+    if (typeof payload.userId !== "string" || payload.userId.length === 0) {
+      return null;
+    }
+
     return payload as SessionPayload;
   } catch {
     return null;

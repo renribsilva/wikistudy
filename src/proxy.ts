@@ -1,33 +1,32 @@
 import { NextRequest, NextResponse } from "next/server";
 import { decrypt } from "@/app/identity/session/session";
 
-/** Rotas que exigem sessão autenticada (`session?.userId`). */
-const protectedRoutes = ["/dashboard"];
-
-/** Rotas públicas que redirecionam para `/dashboard` quando o usuário já está autenticado. */
-const publicRoutes = ["/login", "/signup", "/"];
+/** Rotas que redirecionam para `/dashboard` quando o usuário já está autenticado. */
+const authRoutes = ["/login", "/signup"];
 
 /**
- * Intercepta as requisições elegíveis pelo `config.matcher` e aplica regras de
- * redirecionamento entre rotas protegidas e públicas com base no cookie `session`.
+ * Intercepta as requisições elegíveis pelo `config.matcher`:
+ * - Redireciona a raiz (`/`) para `/dashboard`.
+ * - Redireciona rotas de autenticação (`/login`, `/signup`) para `/dashboard`
+ *   quando já existe sessão válida.
  *
  * @param req - Requisição HTTP recebida (`NextRequest`).
  * @returns Resposta de redirecionamento (`NextResponse.redirect`) ou continuação (`NextResponse.next`).
  */
 export default async function proxy(req: NextRequest) {
   const path = req.nextUrl.pathname;
-  const isProtectedRoute = protectedRoutes.includes(path);
-  const isPublicRoute = publicRoutes.includes(path);
 
-  const cookie = req.cookies.get("session")?.value;
-  const session = await decrypt(cookie);
-
-  if (isProtectedRoute && !session?.userId) {
-    return NextResponse.redirect(new URL("/login", req.nextUrl));
+  if (path === "/") {
+    return NextResponse.redirect(new URL("/dashboard", req.nextUrl));
   }
 
-  if (isPublicRoute && session?.userId && !path.startsWith("/dashboard")) {
-    return NextResponse.redirect(new URL("/dashboard", req.nextUrl));
+  if (authRoutes.includes(path)) {
+    const cookie = req.cookies.get("session")?.value;
+    const session = await decrypt(cookie);
+
+    if (session?.userId) {
+      return NextResponse.redirect(new URL("/dashboard", req.nextUrl));
+    }
   }
 
   return NextResponse.next();
