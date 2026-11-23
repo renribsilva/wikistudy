@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "WikiStudy",
-  description: "WikiStudy — Sistema de autenticação e estudos",
+  description: "WikiStudy — Plataforma de estudos para vestibulandos.",
 };
 
 export default function RootLayout({
