@@ -177,6 +177,12 @@ export async function login(
       };
     }
 
+    if (!user.password) {
+      return {
+        message: "E-mail ou senha inválidos. Tente continuar com o Google.",
+      };
+    }
+
     // 3. Compara a senha informada com o hash armazenado no banco
     const passwordMatch = await bcrypt.compare(password, user.password);
     if (!passwordMatch) {

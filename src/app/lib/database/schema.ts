@@ -26,7 +26,7 @@ export type UserRole = (typeof USER_ROLES)[number];
  * - A coluna `id` usa UUIDv7 para evitar enumeração sequencial mantendo ordenação cronológica.
  * - O e-mail não é armazenado em texto puro: `emailBlindIndex` guarda o HMAC-SHA256
  *   determinístico para busca/unicidade e `emailEncrypted` guarda o valor cifrado com AES-256-GCM.
- * - A coluna `password` armazena um **hash** seguro bcrypt.
+ * - A coluna `password` armazena um **hash** seguro bcrypt ou fica `null` quando a conta entra apenas via OAuth (Google).
  * - A coluna `avatarFace` (`avatar_face`) guarda o índice (`1` a `6`) da face SVG selecionada pelo usuário.
  * - A coluna `role` define o nível de permissão do usuário (`user`, `colab` ou `admin`) e deve ser validada no servidor.
  * - Evite retornar `password`, `emailEncrypted` ou `emailBlindIndex` desnecessariamente em consultas públicas ou respostas de API/Server Actions.
@@ -46,8 +46,8 @@ export const users = pgTable("users", {
   /** E-mail normalizado cifrado com AES-256-GCM (não fica em texto puro no banco). */
   emailEncrypted: text("email_encrypted").notNull(),
 
-  /** Hash da senha do usuário (nunca armazenar senha em texto plano). */
-  password: text("password").notNull(),
+  /** Hash da senha do usuário (nunca armazenar senha em texto plano), ou `null` para contas Google sem senha. */
+  password: text("password"),
 
   /** Índice da face do avatar (`1` a `6`) exibida no menu do perfil; padrão `1`. */
   avatarFace: smallint("avatar_face").default(1).notNull(),

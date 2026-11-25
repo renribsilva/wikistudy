@@ -12,6 +12,16 @@
   --color-text-muted-dark: hsl(240, 4%, 65%);
   --color-panel-dark: hsl(240, 8%, 16%);
   --color-border-button-dark: #515147;
+
+  /* --- GOOGLE BUTTON (padrão light) --- */
+  --google-bg: #ffffff;
+  --google-text: #1f1f1f;
+  --google-border: #747775;
+  --google-state-bg: #303030;
+  --google-hover-opacity: 8%;
+  --google-active-opacity: 12%;
+  --google-shadow:
+    0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
 }
 
 .dark {
@@ -20,6 +30,15 @@
   --text-muted: var(--color-text-muted-dark);
   --panel: var(--color-panel-dark);
   --border-button: var(--color-border-button-dark);
+
+  --google-bg: #131314;
+  --google-text: #e3e3e3;
+  --google-border: #8e918f;
+  --google-state-bg: #ffffff;
+  --google-hover-opacity: 8%;
+  --google-active-opacity: 12%;
+  --google-shadow:
+    0 1px 2px 0 rgba(0, 0, 0, 0.45), 0 1px 3px 1px rgba(0, 0, 0, 0.25);
 }
 
 .light {
@@ -28,6 +47,15 @@
   --text-muted: var(--color-text-muted-light);
   --panel: var(--color-panel-light);
   --border-button: var(--color-border-button-light);
+
+  --google-bg: #ffffff;
+  --google-text: #1f1f1f;
+  --google-border: #747775;
+  --google-state-bg: #303030;
+  --google-hover-opacity: 8%;
+  --google-active-opacity: 12%;
+  --google-shadow:
+    0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
 }
 
 html,

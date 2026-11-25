@@ -29,7 +29,8 @@
     "**/*.mts",
     "**/*.ts",
     "**/*.tsx",
-    "src/app/identity/dashboarddashboard"
+    "src/app/identity/dashboarddashboard",
+    "src/components/svg/google.tx"
   ],
   "exclude": ["node_modules"]
 }

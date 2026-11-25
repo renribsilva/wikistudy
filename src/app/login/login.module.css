@@ -3,7 +3,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem 1rem;
+  padding: 1.5rem 1rem;
   background-color: var(--background);
   color: var(--foreground);
   box-sizing: border-box;
@@ -12,7 +12,7 @@
 .login_card {
   width: 100%;
   max-width: 400px;
-  padding: 2rem;
+  padding: 1.625rem 1.75rem;
   border-radius: 12px;
   background-color: var(--panel);
   border: 1px solid var(--border-button);
@@ -20,8 +20,8 @@
 }
 
 .login_title {
-  margin: 0 0 1.5rem;
-  font-size: 1.625rem;
+  margin: 0 0 1.125rem;
+  font-size: 1.5rem;
   font-weight: 700;
   letter-spacing: -0.02em;
   line-height: 1.25;
@@ -30,13 +30,13 @@
 .login_form {
   display: flex;
   flex-direction: column;
-  gap: 1.125rem;
+  gap: 0.875rem;
 }
 
 .field_group {
   display: flex;
   flex-direction: column;
-  gap: 0.375rem;
+  gap: 0.3rem;
   min-width: 0;
 }
 
@@ -48,9 +48,9 @@
 
 .field_input {
   width: 100%;
-  padding: 0.65rem 0.75rem;
+  padding: 0.55rem 0.75rem;
   font-size: 0.9375rem;
-  line-height: 1.4;
+  line-height: 1.35;
   color: var(--foreground);
   background-color: var(--background);
   border: 1px solid var(--border-button);
@@ -84,15 +84,15 @@
 .field_error {
   margin: 0;
   font-size: 0.8125rem;
-  line-height: 1.4;
+  line-height: 1.35;
   color: #dc2626;
 }
 
 .form_alert {
-  margin: 0;
-  padding: 0.65rem 0.75rem;
+  margin: 0 0 0.75rem;
+  padding: 0.55rem 0.75rem;
   font-size: 0.875rem;
-  line-height: 1.4;
+  line-height: 1.35;
   border-radius: 8px;
   color: #dc2626;
   background-color: color-mix(in srgb, #dc2626 10%, transparent);
@@ -100,9 +100,9 @@
 }
 
 .submit_button {
-  margin-top: 0.25rem;
+  margin-top: 0.2rem;
   width: 100%;
-  padding: 0.7rem 1rem;
+  padding: 0.6rem 1rem;
   font-size: 0.9375rem;
   font-weight: 600;
   color: var(--background);
@@ -123,17 +123,17 @@
 }
 
 .signup_title {
-  margin: 0 0 1.5rem;
-  font-size: 1.625rem;
+  margin: 0 0 1.125rem;
+  font-size: 1.5rem;
   font-weight: 700;
   letter-spacing: -0.02em;
   line-height: 1.25;
 }
 
 .legal_notice {
-  margin: 1.25rem 0 0;
-  font-size: 0.8125rem;
-  line-height: 1.55;
+  margin: 0.95rem 0 0;
+  font-size: 0.78rem;
+  line-height: 1.45;
   color: var(--foreground, inherit);
   text-align: center;
 }
@@ -156,8 +156,8 @@
 }
 
 .signup_prompt {
-  margin: 1rem 0 0;
-  padding-top: 1rem;
+  margin: 0.8rem 0 0;
+  padding-top: 0.8rem;
   border-top: 1px solid var(--border-button);
   font-size: 0.875rem;
   text-align: center;
@@ -175,7 +175,7 @@
 
 @media (max-width: 480px) {
   .login_card {
-    padding: 1.5rem 1.25rem;
+    padding: 1.35rem 1.15rem;
     border-radius: 10px;
   }
 }
@@ -235,4 +235,34 @@
   outline: 2px solid var(--foreground);
   outline-offset: 2px;
   border-radius: 4px;
+}
+
+.oauth_divider {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0.75rem 0;
+  font-size: 0.8125rem;
+  color: var(--text-muted, var(--foreground));
+  opacity: 0.75;
+}
+
+.oauth_divider::before,
+.oauth_divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background-color: var(--border-button);
+}
+
+.google_button {
+  width: 100%;
+  max-width: 400px;
+  justify-content: center;
+}
+
+.login_card a.google_button,
+.login_card a.google_button:hover {
+  text-decoration: none;
+  opacity: 1;
 }

@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Link from "next/link";
 import SignupForm from "@/components/tsx/signup-form";
 import styles from "./signup.module.css";
@@ -7,7 +8,9 @@ export default function SignupPage() {
     <div className={styles.signup_wrapper}>
       <div className={styles.signup_card}>
         <h1 className={styles.signup_title}>Criar conta</h1>
-        <SignupForm />
+        <Suspense>
+          <SignupForm />
+        </Suspense>
         <p className={styles.legal_notice}>
           Ao continuar, concordas com os nossos{" "}
           <Link href="/tos" className={styles.legal_link}>

@@ -10,6 +10,7 @@ import Settings from "@/components/svg/settings";
 import Logout from "@/components/svg/logout";
 import Home from "@/components/svg/home";
 import Theme from "../buttons/theme-button";
+import GoogleSignInButton from "../buttons/google-button";
 
 interface DropdownProfileProps {
   isAuthenticated?: boolean;
@@ -118,11 +119,15 @@ function DropdownProfile({
                     </div>
                   </button>
                 </form>
-              </div>{" "}
+              </div>
             </>
           ) : (
             <>
               <div className={styles.dropdown_auth_actions}>
+                <GoogleSignInButton
+                  className={styles.dropdown_google_button}
+                  onClick={() => setIsOpen(false)}
+                />
                 <Link
                   href="/login"
                   className={styles.dropdown_auth_login}
@@ -138,27 +143,19 @@ function DropdownProfile({
                   Criar conta
                 </Link>
               </div>
-              <hr className={styles.dropdown_divider} />
-              <div className={styles.dropdown_body}>
-                <Link
-                  href="/"
-                  className={styles.dropdown_list_button}
-                  onClick={() => setIsOpen(false)}
+              {isMobile && (
+                <div
+                  className={`${styles.dropdown_body} ${styles.dropdown_theme_footer}`}
                 >
-                  <div>Home</div>
-                  <div className={styles.dropdown_list_icon}>
-                    <Home width="20px" height="20px" />
-                  </div>
-                </Link>
-                {isMobile && (
+                  <hr className={styles.dropdown_divider} />
                   <div className={styles.dropdown_list_button}>
                     <div>Tema</div>
                     <div>
                       <Theme compact />
                     </div>
                   </div>
-                )}
-              </div>
+                </div>
+              )}
             </>
           )}
         </div>
