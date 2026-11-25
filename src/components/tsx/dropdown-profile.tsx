@@ -2,17 +2,28 @@
 
 import { useEffect, useRef, useState } from "react";
 import styles from "./components.module.css";
-import Profile from "../svg/profile";
 import { logout } from "@/app/lib/session/actions";
+import Logout from "../svg/logout";
+import Settings from "../svg/settings";
+import Link from "next/link";
+import { useSidebar } from "@/context/sidebar-context";
+import Theme from "./theme-button";
+import { AvatarFace } from "./settings/face-index";
 
 interface DropdownProfileProps {
   userName?: string | null;
   userEmail?: string | null;
+  avatarFace?: number | string | null;
 }
 
-function DropdownProfile({ userName, userEmail }: DropdownProfileProps) {
+function DropdownProfile({
+  userName,
+  userEmail,
+  avatarFace,
+}: DropdownProfileProps) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const { isMobile } = useSidebar();
 
   useEffect(() => {
     if (!isOpen) return;
@@ -31,77 +42,60 @@ function DropdownProfile({ userName, userEmail }: DropdownProfileProps) {
   }, [isOpen]);
 
   return (
-    <div
-      className={styles.dropdown_container}
-      ref={dropdownRef}
-      style={{ position: "relative", display: "inline-flex" }}
-    >
+    <div className={styles.dropdown_container} ref={dropdownRef}>
       <button
         type="button"
         aria-expanded={isOpen}
         aria-haspopup="menu"
         aria-label="Abrir menu do perfil"
         onClick={() => setIsOpen((prev) => !prev)}
-        className={styles.dropdown_button}
-        style={{ cursor: "pointer" }}
+        className={styles.dropdown_face}
       >
-        <Profile />
-      </button>
-
+        <AvatarFace faceId={avatarFace} />
+      </button>{" "}
       {isOpen && (
-        <div
-          className={styles.dropdown_list_sidebar}
-          role="menu"
-          style={{
-            position: "absolute",
-            top: "calc(100% + 6px)",
-            right: 0,
-            width: "max-content",
-            minWidth: "180px",
-            maxWidth: "260px",
-            display: "flex",
-            flexDirection: "column",
-            gap: "6px",
-            padding: "10px 12px",
-            zIndex: 50,
-          }}
-        >
-          {userName && (
-            <div
-              style={{
-                whiteSpace: "nowrap",
-                overflow: "hidden",
-                textOverflow: "ellipsis",
-                fontSize: "14px",
-                fontWeight: 500,
-              }}
-            >
-              {userName}
+        <div className={styles.dropdown_list} role="menu">
+          <Link
+            href="/account/settings"
+            className={styles.dropdown_list_button}
+            onClick={() => setIsOpen(false)}
+          >
+            <div>
+              {userName && (
+                <div className={styles.dropdown_list_user}>{userName}</div>
+              )}
+              {userEmail && (
+                <div className={styles.dropdown_list_email}>{userEmail}</div>
+              )}
             </div>
-          )}
-
-          {userEmail && (
-            <div
-              style={{
-                whiteSpace: "nowrap",
-                overflow: "hidden",
-                textOverflow: "ellipsis",
-                fontSize: "12px",
-                opacity: 0.75,
-              }}
-            >
-              {userEmail}
+            <div className={styles.dropdown_list_icon}>
+              <Settings width="20px" height="20px" />
             </div>
-          )}
-
-          <form action={logout} style={{ display: "flex", marginTop: "4px" }}>
-            <button
-              type="submit"
-              style={{ cursor: "pointer", whiteSpace: "nowrap" }}
-            >
-              Sair
-            </button>
-          </form>
+          </Link>
+          <hr className={styles.dropdown_divider} />
+          <div className={styles.dropdown_body}>
+            <div className={styles.dropdown_list_button}>
+              {isMobile && (
+                <>
+                  <div>Tema</div>
+                  <div>
+                    <Theme />
+                  </div>
+                </>
+              )}
+            </div>
+          </div>
+          <hr className={styles.dropdown_divider} />
+          <div>
+            <form action={logout} className={styles.dropdown_logout_form}>
+              <button type="submit" className={styles.dropdown_list_button}>
+                <div>Sair</div>
+                <div className={styles.dropdown_list_icon}>
+                  <Logout width="20px" height="20px" />
+                </div>
+              </button>
+            </form>
+          </div>
         </div>
       )}
     </div>

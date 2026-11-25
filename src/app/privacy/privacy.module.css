@@ -1,0 +1,37 @@
+.privacy_page {
+  /* background-color: red; */
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+  box-sizing: border-box;
+  margin-left: clamp(10px, 4vw, 60px);
+  margin-right: clamp(10px, 12vw, 200px);
+}
+
+@media (max-width: 800px) {
+  .privacy_page {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+.privacy_page_nav {
+  width: 400px;
+}
+
+.privacy_page_content {
+  width: 100%;
+  overflow-y: auto;
+  box-sizing: border-box;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Edge / IE antigo */
+}
+
+.privacy_page_content::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Edge, Opera */
+}
+
+.privacy_page_contentInner {
+  margin-left: auto;
+  margin-right: auto;
+}

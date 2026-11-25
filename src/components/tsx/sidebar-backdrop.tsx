@@ -1,9 +1,9 @@
 "use client";
 
 import { useSidebar } from "@/context/sidebar-context";
-import styles from "@/app/dashboard/layout.module.css";
 import clsx from "clsx";
 import { useRef } from "react";
+import styles from "./components.module.css";
 
 export function MobileSidebarBackdrop() {
   const { isMobile, isMobileOpen, toggleMobileSidebar } = useSidebar();

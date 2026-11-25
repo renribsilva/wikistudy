@@ -8,7 +8,12 @@ import System from "../svg/system";
 import { useEffect, useState } from "react";
 import clsx from "clsx";
 
-function Theme() {
+interface ThemeProps {
+  width?: string;
+  height?: string;
+}
+
+function Theme({ width = "18px", height = "18px" }: ThemeProps) {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
@@ -38,7 +43,7 @@ function Theme() {
           currentTheme === "system" && styles.theme_button_active,
         )}
       >
-        <System width="18px" height="18px" />
+        <System width={width} height={height} style={{ color: "inherit" }} />
       </button>
 
       <button
@@ -51,7 +56,7 @@ function Theme() {
           currentTheme === "light" && styles.theme_button_active,
         )}
       >
-        <Light width="18px" height="18px" />
+        <Light width={width} height={height} style={{ color: "inherit" }} />
       </button>
 
       <button
@@ -64,7 +69,7 @@ function Theme() {
           currentTheme === "dark" && styles.theme_button_active,
         )}
       >
-        <Dark width="18px" height="18px" />
+        <Dark width={width} height={height} style={{ color: "inherit" }} />
       </button>
     </div>
   );

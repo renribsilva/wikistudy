@@ -1,0 +1,216 @@
+/************************************************/
+/*****************FACE SELECTOR******************/
+/************************************************/
+
+.face_card {
+  border: 1px solid currentColor;
+  border-radius: 12px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.face_heading {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.face_description {
+  margin: 0;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.face_grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.face_option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1 / 1;
+  padding: 0.65rem;
+  border-radius: 10px;
+  border: 1px solid rgba(128, 128, 128, 0.35);
+  background: transparent;
+  cursor: pointer;
+  transition:
+    transform 0.12s ease,
+    border-color 0.12s ease,
+    background-color 0.12s ease;
+}
+
+.face_option:hover:not(:disabled) {
+  border-color: currentColor;
+  transform: translateY(-1px);
+}
+
+.face_option_active {
+  border-width: 2px;
+  border-color: currentColor;
+  background-color: rgba(128, 128, 128, 0.12);
+}
+
+.face_option:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.face_error {
+  margin: 0;
+  padding: 0.65rem 0.85rem;
+  border-radius: 8px;
+  border: 1px solid #dc2626;
+  color: #dc2626;
+  font-size: 0.875rem;
+}
+
+@media (max-width: 520px) {
+  .face_grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/************************************************/
+/*****************NAME FORM CARD******************/
+/************************************************/
+
+.name_card {
+  border: 1px solid currentColor;
+  border-radius: 12px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.name_heading {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.name_description {
+  margin: 0;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.name_form {
+  display: flex;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.name_input {
+  flex: 1 1 220px;
+  padding: 0.6rem 0.75rem;
+  border-radius: 8px;
+  border: 1px solid rgba(128, 128, 128, 0.45);
+  background: transparent;
+  color: inherit;
+  font-size: 0.95rem;
+}
+
+.name_button {
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  border: 1px solid currentColor;
+  background: transparent;
+  color: inherit;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.name_button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.name_status {
+  margin: 0;
+  font-size: 0.875rem;
+}
+
+.name_error {
+  margin: 0;
+  padding: 0.65rem 0.85rem;
+  border-radius: 8px;
+  border: 1px solid #dc2626;
+  color: #dc2626;
+  font-size: 0.875rem;
+}
+
+/*************************************************/
+/*****************DELETE ACCOUNT******************/
+/*************************************************/
+
+.delete_card {
+  border: 1px solid currentColor;
+  border-radius: 12px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.delete_heading {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #dc2626;
+}
+
+.delete_description {
+  margin: 0;
+  font-size: 0.9rem;
+  opacity: 0.85;
+}
+
+.delete_actions {
+  display: flex;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.delete_danger_button {
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #dc2626;
+  background-color: #dc2626;
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.delete_danger_button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.delete_secondary_button {
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  border: 1px solid currentColor;
+  background: transparent;
+  color: inherit;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.delete_error {
+  margin: 0;
+  padding: 0.65rem 0.85rem;
+  border-radius: 8px;
+  border: 1px solid #dc2626;
+  color: #dc2626;
+  font-size: 0.875rem;
+}

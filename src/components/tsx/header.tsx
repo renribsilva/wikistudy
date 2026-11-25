@@ -21,19 +21,23 @@ function AppHeader() {
         </div>
       )}
 
-      <Link href="/" className={styles.appheader_enemlogo}>
+      <Link href="/" className={styles.appheader_wikilogo}>
         <div>WikiStudy</div>
       </Link>
 
       <div className={styles.appheader_profile}>
         {!isMobile && (
-          <div className="flex items-center">
+          <div>
             <Theme />
           </div>
         )}
         {isAuthenticated ? (
-          <div>
-            <DropdownProfile userName={user?.name} userEmail={user?.email} />
+          <div className={styles.appheader_dropdown_wrap}>
+            <DropdownProfile
+              userName={user?.name}
+              userEmail={user?.email}
+              avatarFace={user?.avatarFace}
+            />
           </div>
         ) : (
           <div className={styles.appheader_profile_user}>

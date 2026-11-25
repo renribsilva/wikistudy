@@ -1,17 +1,23 @@
 import Link from "next/link";
 import SignupForm from "@/components/tsx/signup-form";
+import styles from "./signup.module.css";
 
 export default function SignupPage() {
   return (
-    <div className="max-w-sm mx-auto mt-16 p-6 border rounded">
-      <h1 className="text-xl font-semibold mb-4">Criar conta</h1>
-      <SignupForm />
-      <p className="text-sm mt-4">
-        Já tem conta?{" "}
-        <Link href="/login" className="underline">
-          Entrar
-        </Link>
-      </p>
+    <div className={styles.signup_wrapper}>
+      <div className={styles.signup_card}>
+        <h1 className={styles.signup_title}>Criar conta</h1>
+        <SignupForm />
+        <p className={styles.legal_notice}>
+          Ao continuar, concordas com os nossos{" "}
+          <Link href="/tos">Termos de Serviço</Link>,{" "}
+          <Link href="/privacy">Política de Privacidade</Link> e{" "}
+          <Link href="/cookies">Uso de cookies</Link>.
+        </p>
+        <p className={styles.login_prompt}>
+          Já tem conta? <Link href="/login">Entrar</Link>
+        </p>
+      </div>
     </div>
   );
 }

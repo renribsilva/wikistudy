@@ -1,13 +1,12 @@
 import "./globals.css";
-import { Ubuntu } from "next/font/google";
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 import { SidebarProvider } from "@/context/sidebar-context";
+import { Plus_Jakarta_Sans } from "next/font/google";
 
-const ubuntu = Ubuntu({
+const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "700"],
-  preload: false,
+  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -58,7 +57,7 @@ export async function generateMetadata(): Promise<Metadata> {
 function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt-br" suppressHydrationWarning>
-      <body className={ubuntu.className}>
+      <body className={plusJakartaSans.className}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

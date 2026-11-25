@@ -1,0 +1,61 @@
+.signup_wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  background-color: var(--background);
+  color: var(--foreground);
+  box-sizing: border-box;
+}
+
+.signup_card {
+  width: 100%;
+  max-width: 400px;
+  padding: 2rem;
+  border-radius: 12px;
+  background-color: var(--panel);
+  border: 1px solid var(--border-button);
+  box-sizing: border-box;
+}
+
+.signup_title {
+  margin: 0 0 1.5rem;
+  font-size: 1.625rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+
+.legal_notice {
+  margin: 1.25rem 0 0;
+  font-size: 0.8125rem;
+  line-height: 1.55;
+  color: var(--text-muted, inherit);
+  opacity: 0.8;
+}
+
+.login_prompt {
+  margin: 1rem 0 0;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-button);
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+.signup_card a {
+  color: var(--foreground);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.signup_card a:hover {
+  opacity: 0.75;
+}
+
+@media (max-width: 480px) {
+  .signup_card {
+    padding: 1.5rem 1.25rem;
+    border-radius: 10px;
+  }
+}

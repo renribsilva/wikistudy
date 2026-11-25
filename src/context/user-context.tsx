@@ -6,6 +6,8 @@ export interface ContextUser {
   id?: string;
   name?: string | null;
   email?: string | null;
+  avatarFace?: number | string | null;
+  role?: string | null;
 }
 
 const UserContext = createContext<{ user: ContextUser | null }>({

@@ -1,13 +1,14 @@
 import { getOptionalUser } from "@/app/lib/authorization/dal";
+import styles from "./dashboard.module.css";
 
 export default async function DashboardPage() {
   const user = await getOptionalUser();
 
   return (
-    <section className="max-w-3xl mx-auto space-y-6">
+    <section className={styles.dash_section}>
       <div>
-        <h1 className="text-2xl font-semibold">WikiStudy</h1>
-        <p className="text-sm text-gray-600">
+        <h1>WikiStudy</h1>
+        <p>
           {user
             ? `Bem-vindo de volta, ${user.name}!`
             : "Explore o WikiStudy como visitante ou entre para personalizar sua experiência."}

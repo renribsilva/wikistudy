@@ -50,6 +50,8 @@ export const getOptionalUser = cache(async () => {
         id: true,
         name: true,
         emailEncrypted: true,
+        avatarFace: true,
+        role: true,
       },
     });
 
@@ -60,6 +62,8 @@ export const getOptionalUser = cache(async () => {
       id: user.id,
       name: user.name,
       email: decryptEmail(user.emailEncrypted),
+      avatarFace: user.avatarFace,
+      role: user.role,
     };
   } catch {
     console.error("Failed to fetch user");
@@ -67,11 +71,6 @@ export const getOptionalUser = cache(async () => {
   }
 });
 
-/**
- * Busca os dados do usuário autenticado exigindo sessão válida (`verifySession`).
- *
- * @returns Dados do usuário autenticado ou `null` caso não seja encontrado ou ocorra falha.
- */
 export const getUser = cache(async () => {
   const session = await verifySession();
 
@@ -82,6 +81,8 @@ export const getUser = cache(async () => {
         id: true,
         name: true,
         emailEncrypted: true,
+        avatarFace: true,
+        role: true,
       },
     });
 
@@ -92,6 +93,8 @@ export const getUser = cache(async () => {
       id: user.id,
       name: user.name,
       email: decryptEmail(user.emailEncrypted),
+      avatarFace: user.avatarFace,
+      role: user.role,
     };
   } catch {
     console.error("Failed to fetch user");

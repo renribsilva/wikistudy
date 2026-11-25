@@ -2,62 +2,32 @@
   /* --- TEMA LIGHT --- */
   --color-fill-light: hsl(0, 0%, 95%);
   --color-text-base-light: hsl(240, 2%, 10%);
+  --color-text-muted-light: hsl(240, 3%, 42%);
   --color-panel-light: hsl(0, 0%, 100%);
-  --color-grid-light: rgba(0, 0, 0, 0.05);
-  --color-tick-light: rgb(121, 119, 119);
-  --color-axis-label-light: hsl(240, 4%, 46%);
-
-  --color-tab-background-light: hsl(240, 23%, 97%);
-  --color-tab-border-light: hsl(240, 4%, 86%);
-  --color-tab-text-light: hsl(240, 4%, 46%);
-  --color-tab-hover-light: hsl(216, 17%, 94%);
-  --color-tab-indicator-light: hsl(221, 71%, 19%);
+  --color-border-button-light: #ced0d5;
 
   /* --- TEMA DARK --- */
   --color-fill-dark: hsl(240, 10%, 4%);
   --color-text-base-dark: hsl(0, 0%, 98%);
+  --color-text-muted-dark: hsl(240, 4%, 65%);
   --color-panel-dark: hsl(240, 8%, 16%);
-  --color-grid-dark: rgba(255, 255, 255, 0.05);
-  --color-tick-dark: rgba(102, 102, 102);
-
-  --color-tab-background-dark: #272340;
-  --color-tab-border-dark: #3f3f46;
-  --color-tab-text-dark: #a1a1aa;
-  --color-tab-hover-dark: #3f3f46;
-  --color-tab-indicator-dark: hsl(219, 31%, 82%);
-  --color-axis-label-dark: hsl(240, 11%, 74%);
+  --color-border-button-dark: #515147;
 }
 
 .dark {
   --background: var(--color-fill-dark);
   --foreground: var(--color-text-base-dark);
+  --text-muted: var(--color-text-muted-dark);
   --panel: var(--color-panel-dark);
-  --logo: #ffffff;
-  --shadow: rgba(0, 0, 0, 0.4) 0px 4px 12px;
-  --grid: var(--color-grid-dark);
-  --tab-hover: var(--color-tab-background-dark);
-  --tab-border: var(--color-tab-border-dark);
-  --tab-text: var(--color-tab-text-dark);
-  --tab-hover: var(--color-tab-hover-dark);
-  --tab-indicator: var(--color-tab-indicator-dark);
-  --tick: var(--color-tick-dark);
-  --axis-label: var(--color-axis-label-dark);
+  --border-button: var(--color-border-button-dark);
 }
 
 .light {
   --background: var(--color-fill-light);
   --foreground: var(--color-text-base-light);
+  --text-muted: var(--color-text-muted-light);
   --panel: var(--color-panel-light);
-  --logo: #1a1a1b;
-  --shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
-  --grid: var(--color-grid-light);
-  --tab-hover: var(--color-tab-background-light);
-  --tab-border: var(--color-tab-border-light);
-  --tab-text: var(--color-tab-text-light);
-  --tab-hover: var(--color-tab-hover-light);
-  --tab-indicator: var(--color-tab-indicator-light);
-  --tick: var(--color-tick-light);
-  --axis-label: var(--color-axis-label-light);
+  --border-button: var(--color-border-button-light);
 }
 
 html,
@@ -66,37 +36,4 @@ body {
   margin: 0;
   height: 100%;
   min-width: 340px;
-}
-
-.apexcharts-menu {
-  background: var(--tab-hover) !important;
-  border: 1px solid var(--tab-border) !important;
-  color: var(--foreground) !important;
-  /* box-shadow: 0 4px 12px rgba(0,0,0,0.5) !important; */
-}
-
-.apexcharts-menu-icon:hover {
-  color: var(--foreground) !important;
-}
-
-/* Customiza os ícones do toolbar caso o modo dark do Apex não baste */
-.apexcharts-toolbar {
-  background: var(--panel) !important;
-}
-
-/****************************************************************************/
-/*********************** Scrollbar customizada para o ***********************/
-/****************************************************************************/
-
-/* Firefox */
-dialog,
-dialog * {
-  scrollbar-width: none !important;
-}
-
-/* Chrome, Safari, Edge */
-dialog ::-webkit-scrollbar {
-  width: 0px !important;
-  height: 0px !important;
-  display: none !important;
 }

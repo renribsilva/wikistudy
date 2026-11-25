@@ -1,4 +1,4 @@
-import styles from "./layout.module.css";
+import styles from "./dashboard.module.css";
 import { getOptionalUser } from "@/app/lib/authorization/dal";
 import { UserProvider } from "@/context/user-context";
 import AppHeader from "@/components/tsx/header";

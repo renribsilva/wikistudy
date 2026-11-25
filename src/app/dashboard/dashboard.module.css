@@ -58,28 +58,10 @@
   }
 }
 
-/* Backdrop - O fundo que escurece */
-.backdrop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 50;
-  opacity: 0;
-  visibility: hidden;
-  transition:
-    opacity 0.3s ease-in-out,
-    visibility 0.3s ease-in-out;
-}
+/*****************************************/
+/**************DASH SESSION***************/
+/*****************************************/
 
-/* Quando o backdrop estiver ativo */
-.backdrop_active {
-  opacity: 1;
-  visibility: visible;
-}
-
-.privacy {
-  height: fit-content;
+.dash_section {
+  padding: 20px;
 }

@@ -1,17 +1,23 @@
 import { sql } from "drizzle-orm";
-import { pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
+import { pgTable, smallint, text, timestamp, uuid } from "drizzle-orm/pg-core";
+
+export const USER_ROLES = ["user", "colab", "admin"] as const;
+export type UserRole = (typeof USER_ROLES)[number];
 
 /**
  * Tabela `users` no PostgreSQL (via Drizzle ORM).
  *
  * Armazena os registros de usuários da aplicação, incluindo identificador
- * UUIDv7 gerado nativamente pelo Postgres 18+, credenciais e data de criação.
+ * UUIDv7 gerado nativamente pelo Postgres 18+, credenciais, avatar, papel de
+ * acesso e data de criação.
  *
  * @remarks
  * - A coluna `id` usa UUIDv7 para evitar enumeração sequencial mantendo ordenação cronológica.
  * - O e-mail não é armazenado em texto puro: `emailBlindIndex` guarda o HMAC-SHA256
  *   determinístico para busca/unicidade e `emailEncrypted` guarda o valor cifrado com AES-256-GCM.
  * - A coluna `password` armazena um **hash** seguro bcrypt.
+ * - A coluna `avatarFace` (`avatar_face`) guarda o índice (`1` a `6`) da face SVG selecionada pelo usuário.
+ * - A coluna `role` define o nível de permissão do usuário (`user`, `colab` ou `admin`) e deve ser validada no servidor.
  * - Evite retornar `password`, `emailEncrypted` ou `emailBlindIndex` desnecessariamente em consultas públicas ou respostas de API/Server Actions.
  */
 export const users = pgTable("users", {
@@ -31,6 +37,12 @@ export const users = pgTable("users", {
 
   /** Hash da senha do usuário (nunca armazenar senha em texto plano). */
   password: text("password").notNull(),
+
+  /** Índice da face do avatar (`1` a `6`) exibida no menu do perfil; padrão `1`. */
+  avatarFace: smallint("avatar_face").default(1).notNull(),
+
+  /** Papel do usuário na aplicação (`user`, `colab` ou `admin`); padrão `'user'`. */
+  role: text("role").$type<UserRole>().default("user").notNull(),
 
   /** Data e hora de criação do registro (preenchida automaticamente pelo banco). */
   createdAt: timestamp("created_at").defaultNow().notNull(),

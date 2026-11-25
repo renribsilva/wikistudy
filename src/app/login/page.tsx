@@ -3,68 +3,75 @@
 import { useActionState } from "react";
 import Link from "next/link";
 import { login } from "@/app/lib/auth/actions";
+import styles from "./login.module.css";
 
 export default function LoginPage() {
   const [state, action, pending] = useActionState(login, undefined);
 
   return (
-    <div className="max-w-sm mx-auto mt-16 p-6 border rounded">
-      <h1 className="text-xl font-semibold mb-4">Entrar</h1>
+    <div className={styles.login_wrapper}>
+      <div className={styles.login_card}>
+        <h1 className={styles.login_title}>Entrar</h1>
 
-      <form action={action} className="space-y-4">
-        <div>
-          <label htmlFor="email" className="block text-sm mb-1">
-            E-mail
-          </label>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            required
-            className="w-full border rounded px-3 py-2"
-          />
-          {state?.errors?.email && (
-            <p className="text-sm text-red-600 mt-1">{state.errors.email[0]}</p>
+        <form action={action} className={styles.login_form}>
+          <div className={styles.field_group}>
+            <label htmlFor="email" className={styles.field_label}>
+              E-mail
+            </label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              autoComplete="email"
+              required
+              className={styles.field_input}
+            />
+            {state?.errors?.email && (
+              <p className={styles.field_error}>{state.errors.email[0]}</p>
+            )}
+          </div>
+
+          <div className={styles.field_group}>
+            <label htmlFor="password" className={styles.field_label}>
+              Senha
+            </label>
+            <input
+              id="password"
+              name="password"
+              type="password"
+              autoComplete="current-password"
+              required
+              className={styles.field_input}
+            />
+            {state?.errors?.password && (
+              <p className={styles.field_error}>{state.errors.password[0]}</p>
+            )}
+          </div>
+
+          {state?.message && (
+            <p className={styles.form_alert}>{state.message}</p>
           )}
-        </div>
 
-        <div>
-          <label htmlFor="password" className="block text-sm mb-1">
-            Senha
-          </label>
-          <input
-            id="password"
-            name="password"
-            type="password"
-            required
-            className="w-full border rounded px-3 py-2"
-          />
-          {state?.errors?.password && (
-            <p className="text-sm text-red-600 mt-1">
-              {state.errors.password[0]}
-            </p>
-          )}
-        </div>
+          <button
+            type="submit"
+            disabled={pending}
+            className={styles.submit_button}
+          >
+            {pending ? "Entrando..." : "Entrar"}
+          </button>
+        </form>
 
-        {state?.message && (
-          <p className="text-sm text-red-600">{state.message}</p>
-        )}
+        <p className={styles.legal_notice}>
+          Ao continuar, concordas com os nossos{" "}
+          <Link href="/tos">Termos de Serviço</Link>,{" "}
+          <Link href="/privacy">Política de Privacidade</Link> e{" "}
+          <Link href="/cookies">Uso de cookies</Link>.
+        </p>
 
-        <button
-          type="submit"
-          disabled={pending}
-          className="w-full border rounded py-2 font-medium disabled:opacity-50"
-        >
-          {pending ? "Entrando..." : "Entrar"}
-        </button>
-      </form>
-
-      <p className="text-sm mt-4">
-        Ainda não tem conta?{" "}
-        <Link href="/signup" className="underline">
-          Criar conta
-        </Link>
-      </p>
+        <p className={styles.signup_prompt}>
+          Ainda não tem conta? <Link href="/signup">Criar conta</Link>
+        </p>
+      </div>
     </div>
   );
 }
