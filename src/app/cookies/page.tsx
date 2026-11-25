@@ -8,7 +8,7 @@ import CookiePolicy, {
 import { useSidebar } from "@/providers/sidebar-provider";
 import Footer from "@/components/tsx/footer";
 
-export default function PrivacyPage() {
+export default function CookiesPage() {
   const cookieProps = {
     lastUpdated: "24/11/2026",
     maintainerName: "Equipe WikiStudy",
@@ -22,20 +22,20 @@ export default function PrivacyPage() {
   const { isMobile } = useSidebar();
 
   return (
-    <>
+    <div className={styles.cookie_wrapper}>
       <div className={styles.cookie_page}>
         {!isMobile && (
-          <div className={styles.cookie_page_nav}>
+          <aside className={styles.cookie_page_nav}>
             <LegalNav items={navItems} />
-          </div>
+          </aside>
         )}
-        <div className={styles.cookie_page_content}>
+        <main className={styles.cookie_page_content}>
           <div className={styles.cookie_page_contentInner}>
             <CookiePolicy {...cookieProps} />
           </div>
-        </div>
+        </main>
       </div>
       {isMobile && <Footer showHome showTheme />}
-    </>
+    </div>
   );
 }

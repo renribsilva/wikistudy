@@ -22,20 +22,20 @@ export default function PrivacyPage() {
   const { isMobile } = useSidebar();
 
   return (
-    <>
+    <div className={styles.privacy_wrapper}>
       <div className={styles.privacy_page}>
         {!isMobile && (
-          <div className={styles.privacy_page_nav}>
+          <aside className={styles.privacy_page_nav}>
             <LegalNav items={navItems} />
-          </div>
+          </aside>
         )}
-        <div className={styles.privacy_page_content}>
+        <main className={styles.privacy_page_content}>
           <div className={styles.privacy_page_contentInner}>
             <PrivacyPolicy {...privacyProps} />
           </div>
-        </div>
+        </main>
       </div>
       {isMobile && <Footer showHome showTheme />}
-    </>
+    </div>
   );
 }

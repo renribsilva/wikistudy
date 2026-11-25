@@ -1,7 +1,13 @@
-.tos_page {
+.tos_wrapper {
+  min-height: 100dvh;
   display: flex;
-  height: calc(100dvh);
-  overflow: hidden;
+  flex-direction: column;
+}
+
+.tos_page {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
   box-sizing: border-box;
   margin-left: clamp(10px, 4vw, 60px);
   margin-right: clamp(10px, 12vw, 200px);
@@ -15,7 +21,9 @@
 }
 
 .tos_page_nav {
-  height: 100%;
+  position: sticky;
+  top: 0;
+  max-height: 100dvh;
   overflow-y: auto;
   min-height: 0;
 }
@@ -23,15 +31,8 @@
 .tos_page_content {
   flex: 1;
   min-width: 0;
-  height: 100%;
-  overflow-y: auto;
+  min-height: 0;
   box-sizing: border-box;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* Edge / IE antigo */
-}
-
-.tos_page_content::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Edge, Opera */
 }
 
 .tos_page_contentInner {
