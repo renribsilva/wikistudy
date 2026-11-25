@@ -17,7 +17,10 @@
   position: fixed;
   margin-top: 60px;
   z-index: 100;
-  @media (max-width: 800px) {
+}
+
+@media (max-width: 800px) {
+  .layout_sidebar {
     width: 0;
     pointer-events: none;
     overflow: visible;
@@ -33,7 +36,6 @@
 }
 
 .layout_main {
-  /* background-color:aqua; */
   margin-top: 60px;
   box-sizing: border-box;
   transition:
@@ -45,13 +47,15 @@
   margin-left: 250px;
   width: calc(100% - 250px);
   min-height: calc(100svh - 60px);
+  display: flex;
+  flex-direction: column;
 }
 
 @media (max-width: 800px) {
   .layout_main {
     margin-left: 0;
-    /* background-color:blue; */
-    width: 100svw;
+    width: 100%;
+    min-height: calc(100svh - 60px);
     transition:
       margin 0.3s ease-in-out,
       transform 0.3s ease-in-out;
@@ -64,4 +68,5 @@
 
 .dash_section {
   padding: 20px;
+  flex: 1 0 auto;
 }

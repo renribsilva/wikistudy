@@ -1,0 +1,141 @@
+/*****************************************/
+/***************THEME_BUTTON**************/
+/*****************************************/
+
+.theme_container {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 2px;
+  border: 1px solid var(--border-button);
+  border-radius: 999px;
+  background-color: transparent;
+}
+
+.theme_container_compact {
+  padding: 1px;
+  gap: 1px;
+}
+
+.theme_button_compact {
+  width: 22px;
+  height: 22px;
+}
+
+.theme_button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background-color: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.theme_button:hover {
+  background-color: color-mix(in srgb, var(--foreground) 6%, transparent);
+  color: var(--foreground);
+}
+
+.theme_button_active {
+  background-color: color-mix(in srgb, var(--foreground) 11%, transparent);
+  color: var(--foreground);
+}
+
+/***************************************************/
+/*******************BACK BUTTON*********************/
+/***************************************************/
+
+.back_button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border-button);
+  background-color: var(--panel);
+  color: inherit;
+  height: 40px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.25;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.back_button:hover {
+  background-color: var(--background);
+}
+
+.back_button:active {
+  transform: translateY(1px);
+}
+
+.back_button:focus-visible {
+  outline: 2px solid var(--tick);
+  outline-offset: 2px;
+}
+
+.back_button_icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s ease;
+}
+
+.back_button:hover .back_button_icon {
+  transform: translateX(-2px);
+}
+
+/***************************************************/
+/*******************HOME BUTTON*********************/
+/***************************************************/
+
+.home_container {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 2px;
+  border: 1px solid var(--border-button);
+  border-radius: 999px;
+  background-color: transparent;
+}
+
+.home_button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background-color: transparent;
+  color: var(--text-muted);
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.home_button:hover {
+  background-color: color-mix(in srgb, var(--foreground) 6%, transparent);
+  color: var(--foreground);
+}
+
+.home_button_active {
+  background-color: color-mix(in srgb, var(--foreground) 11%, transparent);
+  color: var(--foreground);
+}

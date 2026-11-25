@@ -5,7 +5,8 @@ import styles from "./cookie.module.css";
 import CookiePolicy, {
   buildCookiesItems,
 } from "@/components/tsx/legal/cookies-policy";
-import { useSidebar } from "@/context/sidebar-context";
+import { useSidebar } from "@/providers/sidebar-provider";
+import Footer from "@/components/tsx/footer";
 
 export default function PrivacyPage() {
   const cookieProps = {
@@ -21,17 +22,20 @@ export default function PrivacyPage() {
   const { isMobile } = useSidebar();
 
   return (
-    <div className={styles.cookie_page}>
-      {!isMobile && (
-        <div className={styles.cookie_page_nav}>
-          <LegalNav items={navItems} />
-        </div>
-      )}
-      <div className={styles.cookie_page_content}>
-        <div className={styles.cookie_page_contentInner}>
-          <CookiePolicy {...cookieProps} />
+    <>
+      <div className={styles.cookie_page}>
+        {!isMobile && (
+          <div className={styles.cookie_page_nav}>
+            <LegalNav items={navItems} />
+          </div>
+        )}
+        <div className={styles.cookie_page_content}>
+          <div className={styles.cookie_page_contentInner}>
+            <CookiePolicy {...cookieProps} />
+          </div>
         </div>
       </div>
-    </div>
+      {isMobile && <Footer showHome showTheme />}
+    </>
   );
 }

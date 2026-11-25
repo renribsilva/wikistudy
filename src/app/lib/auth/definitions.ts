@@ -55,7 +55,10 @@ export const LoginFormSchema = z.object({
 });
 
 /**
- * Estado retornado por Server Actions de formulário de autenticação.
+ * Estado retornado por Server Actions de formulário de autenticação e recuperação de senha.
+ *
+ * Contém erros de validação por campo (`errors`), uma mensagem geral (`message`)
+ * ou `undefined` quando ainda não houve submissão/erro.
  */
 export type FormState =
   | {
@@ -63,6 +66,8 @@ export type FormState =
         name?: string[];
         email?: string[];
         password?: string[];
+        confirmPassword?: string[];
+        token?: string[];
       };
       message?: string;
     }

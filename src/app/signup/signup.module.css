@@ -31,8 +31,25 @@
   margin: 1.25rem 0 0;
   font-size: 0.8125rem;
   line-height: 1.55;
-  color: var(--text-muted, inherit);
-  opacity: 0.8;
+  color: var(--foreground, inherit);
+  text-align: center;
+}
+
+.legal_link,
+.legal_link:link,
+.legal_link:visited,
+.legal_link:hover,
+.legal_link:focus-visible {
+  text-decoration: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+  font-weight: 700;
+  color: inherit;
+}
+
+.legal_link:hover,
+.legal_link:focus-visible {
+  opacity: 1;
 }
 
 .login_prompt {

@@ -3,6 +3,7 @@
 import { useActionState } from "react";
 import { signup } from "@/app/lib/auth/actions";
 import styles from "./components.module.css";
+import { PasswordInput } from "./password-input";
 
 export default function SignupForm() {
   const [state, action, pending] = useActionState(signup, undefined);
@@ -46,12 +47,13 @@ export default function SignupForm() {
         <label htmlFor="password" className={styles.field_label}>
           Senha
         </label>
-        <input
+        <PasswordInput
           id="password"
           name="password"
-          type="password"
           autoComplete="new-password"
-          className={styles.field_input}
+          wrapperClassName={styles.password_wrapper}
+          inputClassName={`${styles.field_input} ${styles.password_input}`}
+          toggleClassName={styles.password_toggle}
         />
         {state?.errors?.password && (
           <div className={styles.password_errors}>

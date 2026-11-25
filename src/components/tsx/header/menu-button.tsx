@@ -1,8 +1,8 @@
 "use client";
 
-import { useSidebar } from "@/context/sidebar-context";
-import Menu from "../svg/menu";
-import styles from "./components.module.css";
+import { useSidebar } from "@/providers/sidebar-provider";
+import styles from "./header.module.css";
+import Menu from "@/components/svg/menu";
 
 function MenuButton() {
   const { toggleMobileSidebar } = useSidebar();

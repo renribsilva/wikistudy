@@ -1,7 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
-import { SidebarProvider } from "@/context/sidebar-context";
+import { SidebarProvider } from "@/providers/sidebar-provider";
 import { Plus_Jakarta_Sans } from "next/font/google";
 
 const plusJakartaSans = Plus_Jakarta_Sans({

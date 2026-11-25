@@ -1,0 +1,99 @@
+/***************************************************/
+/*****************SIDEBAR-BACKDROP******************/
+/***************************************************/
+
+/* Backdrop - O fundo que escurece */
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 50;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.3s ease-in-out,
+    visibility 0.3s ease-in-out;
+}
+
+/* Quando o backdrop estiver ativo */
+.backdrop_active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/************************************/
+/***************SIDEBAR**************/
+/************************************/
+
+.appsidebar_container {
+  background-color: var(--panel);
+  border-right: 1px solid var(--background);
+  width: 250px;
+  height: 100%;
+  padding: 10px;
+  padding-right: 0;
+  padding-top: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overscroll-behavior: contain;
+
+  @media (max-width: 800px) {
+    position: fixed;
+    left: 0;
+    top: 60px;
+    height: calc(100dvh - 60px);
+    transform: translateX(-100%);
+    visibility: hidden;
+    pointer-events: none;
+    will-change: transform;
+    transition:
+      transform 0.3s ease-in-out,
+      visibility 0s linear 0.3s;
+  }
+}
+
+.appsidebar_mobile_open {
+  @media (max-width: 800px) {
+    transform: translateX(0);
+    visibility: visible;
+    pointer-events: auto;
+    transition:
+      transform 0.3s ease-in-out,
+      visibility 0s linear 0s;
+  }
+}
+.appsidebar_hr_box {
+  padding-top: 10px;
+}
+
+.appsidebar_hr {
+  border: none;
+  border-top: 0.5px solid var(--tick);
+  width: 100%;
+  opacity: 0.3;
+}
+
+.appsidebar_topper {
+  /* background-color: aquamarine; */
+  padding-right: 10px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+}
+
+.appsidebar_dropdown {
+  padding-top: 10px;
+}
+
+.appsidebar_footer {
+  /* background-color: rgb(158, 100, 52); */
+  padding-block: 15px;
+}

@@ -3,7 +3,8 @@
 /************************************************/
 
 .face_card {
-  border: 1px solid currentColor;
+  background-color: var(--panel);
+  border: 1px solid var(--border-button);
   border-radius: 12px;
   padding: 1.25rem;
   display: flex;
@@ -81,7 +82,8 @@
 /************************************************/
 
 .name_card {
-  border: 1px solid currentColor;
+  background-color: var(--panel);
+  border: 1px solid var(--border-button);
   border-radius: 12px;
   padding: 1.25rem;
   display: flex;
@@ -152,7 +154,8 @@
 /*************************************************/
 
 .delete_card {
-  border: 1px solid currentColor;
+  background-color: var(--panel);
+  border: 1px solid var(--border-button);
   border-radius: 12px;
   padding: 1.25rem;
   display: flex;

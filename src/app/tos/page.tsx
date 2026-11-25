@@ -5,7 +5,8 @@ import TermsOfService, {
   buildTosItems,
 } from "@/components/tsx/legal/tos-policy";
 import styles from "./tos.module.css";
-import { useSidebar } from "@/context/sidebar-context";
+import { useSidebar } from "@/providers/sidebar-provider";
+import Footer from "@/components/tsx/footer";
 
 export default function TosPage() {
   const tosProps = {
@@ -24,17 +25,20 @@ export default function TosPage() {
   const { isMobile } = useSidebar();
 
   return (
-    <div className={styles.tos_page}>
-      {!isMobile && (
-        <div className={styles.tos_page_nav}>
-          <LegalNav items={navItems} />
-        </div>
-      )}
-      <div className={styles.tos_page_content}>
-        <div className={styles.tos_page_contentInner}>
-          <TermsOfService {...tosProps} />
+    <>
+      <div className={styles.tos_page}>
+        {!isMobile && (
+          <div className={styles.tos_page_nav}>
+            <LegalNav items={navItems} />
+          </div>
+        )}
+        <div className={styles.tos_page_content}>
+          <div className={styles.tos_page_contentInner}>
+            <TermsOfService {...tosProps} />
+          </div>
         </div>
       </div>
-    </div>
+      {isMobile && <Footer showHome showTheme />}
+    </>
   );
 }

@@ -1,0 +1,192 @@
+.login_wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  background-color: var(--background);
+  color: var(--foreground);
+  box-sizing: border-box;
+}
+
+.login_card {
+  width: 100%;
+  max-width: 400px;
+  padding: 2rem;
+  border-radius: 12px;
+  background-color: var(--panel);
+  border: 1px solid var(--border-button);
+  box-sizing: border-box;
+}
+
+.login_title {
+  margin: 0 0 1.5rem;
+  font-size: 1.625rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+
+.login_form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.125rem;
+}
+
+.field_group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  min-width: 0;
+}
+
+.field_label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--foreground);
+}
+
+.field_input {
+  width: 100%;
+  padding: 0.65rem 0.75rem;
+  font-size: 0.9375rem;
+  line-height: 1.4;
+  color: var(--foreground);
+  background-color: var(--background);
+  border: 1px solid var(--border-button);
+  border-radius: 8px;
+  box-sizing: border-box;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.field_input:-webkit-autofill,
+.field_input:-webkit-autofill:hover,
+.field_input:-webkit-autofill:focus,
+.field_input:-webkit-autofill:active,
+.field_input:autofill {
+  -webkit-text-fill-color: var(--foreground);
+  caret-color: var(--foreground);
+  box-shadow: 0 0 0 1000px var(--background) inset;
+  transition:
+    background-color 50000s ease-in-out 0s,
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.field_input:focus {
+  outline: none;
+  border-color: var(--foreground);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--foreground) 12%, transparent);
+}
+
+.password_wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.password_input {
+  padding-right: 2.5rem;
+}
+
+.password_toggle {
+  position: absolute;
+  right: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--foreground);
+  opacity: 0.75;
+  cursor: pointer;
+}
+
+.password_toggle:hover {
+  opacity: 1;
+}
+
+.field_error {
+  margin: 0;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: #dc2626;
+}
+
+.field_error p {
+  margin: 0 0 0.25rem;
+}
+
+.field_error ul {
+  margin: 0;
+  padding-left: 1.25rem;
+  list-style-type: disc;
+}
+
+.field_error li {
+  margin-bottom: 0.15rem;
+}
+
+.form_alert {
+  margin: 0;
+  padding: 0.65rem 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  border-radius: 8px;
+  color: #dc2626;
+  background-color: color-mix(in srgb, #dc2626 10%, transparent);
+  border: 1px solid color-mix(in srgb, #dc2626 30%, transparent);
+}
+
+.submit_button {
+  margin-top: 0.25rem;
+  width: 100%;
+  padding: 0.7rem 1rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--background);
+  background-color: var(--foreground);
+  border: 1px solid var(--foreground);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+.submit_button:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+.submit_button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.signup_prompt {
+  margin: 1rem 0 0;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-button);
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+.login_card a {
+  color: var(--foreground);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.login_card a:hover {
+  opacity: 0.75;
+}
+
+@media (max-width: 480px) {
+  .login_card {
+    padding: 1.5rem 1.25rem;
+    border-radius: 10px;
+  }
+}

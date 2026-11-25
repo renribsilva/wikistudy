@@ -10,9 +10,18 @@ export default function SignupPage() {
         <SignupForm />
         <p className={styles.legal_notice}>
           Ao continuar, concordas com os nossos{" "}
-          <Link href="/tos">Termos de Serviço</Link>,{" "}
-          <Link href="/privacy">Política de Privacidade</Link> e{" "}
-          <Link href="/cookies">Uso de cookies</Link>.
+          <Link href="/tos" className={styles.legal_link}>
+            Termos de Serviço
+          </Link>
+          ,{" "}
+          <Link href="/privacy" className={styles.legal_link}>
+            Política de Privacidade
+          </Link>{" "}
+          e{" "}
+          <Link href="/cookies" className={styles.legal_link}>
+            Uso de cookies
+          </Link>
+          .
         </p>
         <p className={styles.login_prompt}>
           Já tem conta? <Link href="/login">Entrar</Link>

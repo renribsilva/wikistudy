@@ -6,13 +6,33 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: calc(100vh - 30px);
+  width: 350px;
+  min-width: 350px;
+  max-width: 350px;
+  flex-shrink: 0;
+  min-height: calc(100dvh);
+  max-height: calc(100dvh);
+  overflow-y: auto;
   box-sizing: border-box;
-  padding-top: 40px;
+  padding-top: 50px;
 }
 
 .legal_nav_theme {
   margin-top: auto;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.home_theme_row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
 
 .legal_nav_title {

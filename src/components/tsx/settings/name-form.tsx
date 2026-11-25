@@ -61,9 +61,6 @@ export function NameFormCard({ initialName = "", onSave }: NameFormCardProps) {
       </p>
 
       <form onSubmit={handleSubmit} className={styles.name_form}>
-        <label htmlFor="display-name-input" className="sr-only">
-          Nome de exibição
-        </label>
         <input
           id="display-name-input"
           type="text"

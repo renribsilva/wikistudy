@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
+import { redirect } from "next/navigation";
 import { getUser } from "@/app/lib/authorization/dal";
 import { deleteAccount } from "@/app/lib/settings/delete-account";
 import { updateAvatarFace } from "@/app/lib/settings/update-avatar";
 import { updateUserName } from "@/app/lib/settings/update-name";
 import styles from "./settings.module.css";
 import { FaceSelectorCard } from "@/components/tsx/settings/face-selector";
-import { NameFormCard } from "@/components/tsx/settings/name-form-card";
+import { NameFormCard } from "@/components/tsx/settings/name-form";
 import { DeleteAccountCard } from "@/components/tsx/settings/delete-account";
 
 export const metadata: Metadata = {
@@ -18,7 +19,12 @@ const DEFAULT_AVATAR_FACE = 1 as const;
 
 export default async function AccountSettingsPage() {
   const user = await getUser();
-  const initialFace = user?.avatarFace ?? DEFAULT_AVATAR_FACE;
+
+  if (!user) {
+    redirect("/login");
+  }
+
+  const initialFace = user.avatarFace ?? DEFAULT_AVATAR_FACE;
 
   return (
     <main className={styles.container} aria-labelledby="account-settings-title">
@@ -33,7 +39,7 @@ export default async function AccountSettingsPage() {
         </div>
       </header>
       <section className={styles.section} aria-label="Personalização do perfil">
-        <NameFormCard initialName={user?.name} onSave={updateUserName} />
+        <NameFormCard initialName={user.name} onSave={updateUserName} />
         <FaceSelectorCard
           initialFace={initialFace}
           defaultFace={DEFAULT_AVATAR_FACE}

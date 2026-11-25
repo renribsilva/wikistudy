@@ -1,19 +1,24 @@
 "use client";
 
 import { useTheme } from "next-themes";
-import styles from "./components.module.css";
-import Light from "../svg/light";
-import Dark from "../svg/dark";
-import System from "../svg/system";
+import styles from "./buttons.module.css";
 import { useEffect, useState } from "react";
 import clsx from "clsx";
+import System from "@/components/svg/system";
+import Light from "@/components/svg/light";
+import Dark from "@/components/svg/dark";
 
 interface ThemeProps {
   width?: string;
   height?: string;
+  compact?: boolean;
 }
 
-function Theme({ width = "18px", height = "18px" }: ThemeProps) {
+function Theme({
+  width = "18px",
+  height = "18px",
+  compact = false,
+}: ThemeProps) {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
@@ -26,10 +31,15 @@ function Theme({ width = "18px", height = "18px" }: ThemeProps) {
   }
 
   const currentTheme = theme ?? "system";
+  const iconSize = compact ? "15px" : width;
+  const iconHeight = compact ? "15px" : height;
 
   return (
     <div
-      className={styles.theme_container}
+      className={clsx(
+        styles.theme_container,
+        compact && styles.theme_container_compact,
+      )}
       role="group"
       aria-label="Seletor de tema"
     >
@@ -40,10 +50,15 @@ function Theme({ width = "18px", height = "18px" }: ThemeProps) {
         aria-pressed={currentTheme === "system"}
         className={clsx(
           styles.theme_button,
+          compact && styles.theme_button_compact,
           currentTheme === "system" && styles.theme_button_active,
         )}
       >
-        <System width={width} height={height} style={{ color: "inherit" }} />
+        <System
+          width={iconSize}
+          height={iconHeight}
+          style={{ color: "inherit" }}
+        />
       </button>
 
       <button
@@ -53,10 +68,15 @@ function Theme({ width = "18px", height = "18px" }: ThemeProps) {
         aria-pressed={currentTheme === "light"}
         className={clsx(
           styles.theme_button,
+          compact && styles.theme_button_compact,
           currentTheme === "light" && styles.theme_button_active,
         )}
       >
-        <Light width={width} height={height} style={{ color: "inherit" }} />
+        <Light
+          width={iconSize}
+          height={iconHeight}
+          style={{ color: "inherit" }}
+        />
       </button>
 
       <button
@@ -66,10 +86,15 @@ function Theme({ width = "18px", height = "18px" }: ThemeProps) {
         aria-pressed={currentTheme === "dark"}
         className={clsx(
           styles.theme_button,
+          compact && styles.theme_button_compact,
           currentTheme === "dark" && styles.theme_button_active,
         )}
       >
-        <Dark width={width} height={height} style={{ color: "inherit" }} />
+        <Dark
+          width={iconSize}
+          height={iconHeight}
+          style={{ color: "inherit" }}
+        />
       </button>
     </div>
   );

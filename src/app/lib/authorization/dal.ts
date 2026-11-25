@@ -12,7 +12,7 @@ import { decryptEmail } from "@/app/lib/auth/email-crypto";
  * Valida a sessão atual a partir do cookie `session` e retorna o `userId` autenticado.
  *
  * Envolvida em `cache()` do React para deduplicar a verificação dentro da mesma requisição.
- * Caso a sessão seja ausente ou inválida, redireciona imediatamente para `/login`.
+ * Caso a sessão seja ausente ou inválida, redireciona imediatamente para `/`.
  *
  * @returns Objeto com `{ isAuth: true, userId }` para sessões válidas.
  */

@@ -122,12 +122,37 @@
   cursor: not-allowed;
 }
 
+.signup_title {
+  margin: 0 0 1.5rem;
+  font-size: 1.625rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+
 .legal_notice {
   margin: 1.25rem 0 0;
   font-size: 0.8125rem;
   line-height: 1.55;
-  color: var(--text-muted, inherit);
-  opacity: 0.8;
+  color: var(--foreground, inherit);
+  text-align: center;
+}
+
+.legal_link,
+.legal_link:link,
+.legal_link:visited,
+.legal_link:hover,
+.legal_link:focus-visible {
+  text-decoration: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+  font-weight: 700;
+  color: inherit;
+}
+
+.legal_link:hover,
+.legal_link:focus-visible {
+  opacity: 1;
 }
 
 .signup_prompt {
@@ -153,4 +178,61 @@
     padding: 1.5rem 1.25rem;
     border-radius: 10px;
   }
+}
+
+.password_wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.password_wrapper .field_input {
+  width: 100%;
+  padding-right: 42px;
+  box-sizing: border-box;
+}
+
+.password_toggle {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  border: none;
+  background: transparent;
+  color: inherit;
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+.password_toggle:hover,
+.password_toggle:focus-visible {
+  opacity: 1;
+}
+
+.forgot_link {
+  align-self: flex-end;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--text-muted, var(--foreground));
+  text-decoration: none;
+  transition:
+    color 0.15s ease,
+    opacity 0.15s ease;
+}
+
+.forgot_link:hover {
+  color: var(--foreground);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.forgot_link:focus-visible {
+  outline: 2px solid var(--foreground);
+  outline-offset: 2px;
+  border-radius: 4px;
 }

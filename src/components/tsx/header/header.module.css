@@ -1,0 +1,324 @@
+/********************************************************/
+/*******************DROPDOWN PROFILE*********************/
+/********************************************************/
+
+.dropdown_container {
+  /* background-color: blue; */
+  position: relative;
+  display: inline-flex;
+  width: 100%;
+}
+
+.dropdown_face {
+  background-color: transparent;
+  color: var(--text-muted);
+  border: none;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-weight: 600;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.dropdown_face:hover {
+  color: var(--foreground);
+}
+
+.dropdown_list {
+  position: absolute;
+  top: calc(100% + 20px);
+  right: 0;
+  width: max-content;
+  min-width: 250px;
+  max-width: 300px;
+  min-height: calc(100svh - 140px);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px 12px;
+  border-radius: 10px;
+  background-color: var(--panel);
+  border: 1px solid var(--border-button);
+  box-shadow:
+    0 10px 25px -5px rgba(0, 0, 0, 0.25),
+    0 4px 10px -6px rgba(0, 0, 0, 0.15);
+  z-index: 110;
+}
+
+@media (max-width: 800px) {
+  .dropdown_list {
+    position: fixed;
+    top: var(--header-height, 50px);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    min-width: 100%;
+    height: calc(100dvh - var(--header-height, 50px));
+    min-height: calc(100dvh - var(--header-height, 50px));
+    max-height: calc(100dvh - var(--header-height, 50px));
+    box-sizing: border-box;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+    padding: 16px;
+    overflow-y: auto;
+    background-color: var(--panel);
+    z-index: 110;
+  }
+}
+
+.dropdown_list_button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  height: 32px;
+  padding: 6px 6px;
+  border: 0;
+  border-radius: 8px;
+  background-color: transparent;
+  color: var(--foreground);
+  font: inherit;
+  font-size: 14px;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  box-sizing: border-box;
+}
+
+.dropdown_list_button:hover {
+  background-color: color-mix(in srgb, var(--foreground) 6%, transparent);
+}
+
+.dropdown_list_icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--text-muted);
+}
+
+.dropdown_list_button:hover .dropdown_list_icon {
+  color: var(--foreground);
+}
+
+.dropdown_list_user {
+  padding-top: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.dropdown_list_email {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 12px;
+  opacity: 0.75;
+  padding-bottom: 5px;
+}
+
+.dropdown_divider {
+  width: 100%;
+  height: 1px;
+  margin: 4px 0px;
+  border: 0;
+  background-color: var(--border-button);
+}
+
+.dropdown_footer_group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  margin-top: auto;
+}
+
+.dropdown_logout_form {
+  display: flex;
+  width: 100%;
+}
+
+.dropdown_logout_form .dropdown_list_button {
+  color: var(--foreground);
+}
+
+.dropdown_profile_button {
+  height: auto;
+  min-height: 48px;
+  padding: 8px 6px;
+}
+
+/***********************************/
+/***************HEADER**************/
+/***********************************/
+
+.appheader_container {
+  background-color: var(--panel);
+  height: 60px;
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: 10px;
+  position: fixed;
+  border-bottom: 1px solid var(--background);
+}
+
+.appheader_menu_container {
+  /* background-color: rgb(61, 196, 196); */
+}
+
+.appheader_wikilogo {
+  /* background-color: blueviolet; */
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  font-size: 24px;
+  color: var(--foreground);
+  text-decoration: none;
+}
+
+@media (max-width: 800px) {
+  .appheader_wikilogo {
+    justify-content: center;
+  }
+}
+
+.appheader_profile {
+  padding-right: 10px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.appheader_profile_user {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+}
+
+.appheader_profile_user_login,
+.appheader_profile_user_signup {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 35px;
+  padding: 0px 14px 1px 14px;
+  border-radius: 99px;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.appheader_profile_user_login {
+  border: 1px solid var(--border-button);
+  background-color: transparent;
+  color: inherit;
+}
+
+.appheader_profile_user_signup {
+  background-color: var(--foreground);
+  color: var(--background);
+  border: 1px solid transparent; /* iguala a altura interna ao botão login */
+}
+
+.appheader_dropdown_wrap {
+  display: flex;
+  align-items: center;
+}
+
+.appheader_dropdown_wrap > div > [role="menu"],
+.appheader_dropdown_wrap [data-dropdown-menu] {
+  margin-top: 6px;
+}
+
+/*****************************************/
+/***************MENU_BUTTON**************/
+/*****************************************/
+
+.menu_button {
+  background-color: var(--tab-hover);
+  color: var(--text-muted);
+  border: none;
+  height: 35px;
+  border-radius: 99px;
+  width: 35px;
+  padding: 0;
+  line-height: 0;
+  cursor: pointer;
+}
+
+.menu_button:hover {
+  color: var(--foreground);
+}
+
+/*************************************************/
+/***************DROPDOWN AUTH ACTION**************/
+/*************************************************/
+
+.dropdown_auth_actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 2px 0;
+}
+
+.dropdown_auth_login,
+.dropdown_auth_signup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  box-sizing: border-box;
+  transition:
+    opacity 0.15s ease,
+    background-color 0.15s ease;
+}
+
+/* Botão secundário (Entrar) */
+.dropdown_auth_login {
+  color: var(--foreground);
+  background-color: transparent;
+  border: 1px solid var(--border-button);
+}
+
+.dropdown_auth_login:hover {
+  background-color: color-mix(in srgb, var(--foreground) 6%, transparent);
+}
+
+/* Botão primário (Criar conta) */
+.dropdown_auth_signup {
+  color: var(--background);
+  background-color: var(--foreground);
+  border: 1px solid var(--foreground);
+}
+
+.dropdown_auth_signup:hover {
+  opacity: 0.9;
+}

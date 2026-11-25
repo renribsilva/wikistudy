@@ -1,7 +1,18 @@
 import { sql } from "drizzle-orm";
 import { pgTable, smallint, text, timestamp, uuid } from "drizzle-orm/pg-core";
 
+/**
+ * Lista de papéis de acesso permitidos para usuários na aplicação.
+ *
+ * - `"user"`: usuário padrão.
+ * - `"colab"`: colaborador com permissões adicionais.
+ * - `"admin"`: administrador do sistema.
+ */
 export const USER_ROLES = ["user", "colab", "admin"] as const;
+
+/**
+ * Tipo union derivado de {@link USER_ROLES} representando o papel de um usuário.
+ */
 export type UserRole = (typeof USER_ROLES)[number];
 
 /**
@@ -43,6 +54,42 @@ export const users = pgTable("users", {
 
   /** Papel do usuário na aplicação (`user`, `colab` ou `admin`); padrão `'user'`. */
   role: text("role").$type<UserRole>().default("user").notNull(),
+
+  /** Data e hora de criação do registro (preenchida automaticamente pelo banco). */
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+/**
+ * Tabela `password_reset_tokens` no PostgreSQL (via Drizzle ORM).
+ *
+ * Armazena tokens temporários e de uso único para redefinição de senha via link
+ * enviado por e-mail, vinculados ao usuário em `users`.
+ *
+ * @remarks
+ * - Armazene apenas o **hash** (ex.: SHA-256) do token enviado por e-mail em `tokenHash`,
+ *   nunca o token bruto em texto puro.
+ * - Um token só deve ser considerado válido quando `usedAt` for `null` e `expiresAt`
+ *   estiver no futuro.
+ * - Ao remover um usuário de `users`, os tokens associados são excluídos em cascata
+ *   (`onDelete: "cascade"`).
+ */
+export const passwordResetTokens = pgTable("password_reset_tokens", {
+  /** Identificador único do registro de token (`UUID PRIMARY KEY`). */
+  id: uuid("id").defaultRandom().primaryKey(),
+
+  /** Referência ao usuário (`users.id`) dono da solicitação de redefinição; remove em cascata se o usuário for excluído. */
+  userId: uuid("user_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+
+  /** Hash único do token de recuperação enviado ao e-mail do usuário. */
+  tokenHash: text("token_hash").notNull().unique(),
+
+  /** Data e hora de expiração do token; após esse instante o link perde a validade. */
+  expiresAt: timestamp("expires_at").notNull(),
+
+  /** Data e hora em que o token foi utilizado; permanece `null` enquanto ainda não usado. */
+  usedAt: timestamp("used_at"),
 
   /** Data e hora de criação do registro (preenchida automaticamente pelo banco). */
   createdAt: timestamp("created_at").defaultNow().notNull(),

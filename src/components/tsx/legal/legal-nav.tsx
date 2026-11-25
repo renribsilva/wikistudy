@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import styles from "./legal.module.css";
-import Theme from "../theme-button";
+import Footer from "../footer";
 
 export interface LegalNavItem {
   id: string;
@@ -44,9 +44,7 @@ export function LegalNav({ items, title = "Nesta página" }: LegalNavProps) {
           })}
         </ul>
       </div>
-      <div className={styles.legal_nav_theme}>
-        <Theme />
-      </div>
+      <Footer showHome showTheme />
     </nav>
   );
 }

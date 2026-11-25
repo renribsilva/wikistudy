@@ -1,7 +1,6 @@
 .tos_page {
-  /* background-color: red; */
   display: flex;
-  height: 100vh;
+  height: calc(100dvh);
   overflow: hidden;
   box-sizing: border-box;
   margin-left: clamp(10px, 4vw, 60px);
@@ -16,11 +15,15 @@
 }
 
 .tos_page_nav {
-  width: 400px;
+  height: 100%;
+  overflow-y: auto;
+  min-height: 0;
 }
 
 .tos_page_content {
-  width: 100%;
+  flex: 1;
+  min-width: 0;
+  height: 100%;
   overflow-y: auto;
   box-sizing: border-box;
   scrollbar-width: none; /* Firefox */
