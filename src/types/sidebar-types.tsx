@@ -5,11 +5,7 @@ export type SidebarContextType = {
   windowWidth: number | null;
   isExpanded: boolean;
   isMobileOpen: boolean;
-  activeItem: string | null;
-  openSubmenu: string | null;
   // Funções
-  toggleSidebar: () => void;
-  toggleMobileSidebar: () => void;
-  setActiveItem: (item: string | null) => void;
-  toggleSubmenu: (item: string) => void;
+  toggleExpandSidebar: () => void;
+  toggleHeaderSidebar: () => void;
 };

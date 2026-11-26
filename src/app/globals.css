@@ -33,7 +33,7 @@
 
   --google-bg: #131314;
   --google-text: #e3e3e3;
-  --google-border: #8e918f;
+  --google-border: var(--color-border-button-dark);
   --google-state-bg: #ffffff;
   --google-hover-opacity: 8%;
   --google-active-opacity: 12%;
@@ -50,7 +50,7 @@
 
   --google-bg: #ffffff;
   --google-text: #1f1f1f;
-  --google-border: #747775;
+  --google-border: var(--color-border-button-light);
   --google-state-bg: #303030;
   --google-hover-opacity: 8%;
   --google-active-opacity: 12%;

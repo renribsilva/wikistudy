@@ -27,7 +27,7 @@ function DropdownProfile({
 }: DropdownProfileProps) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const { isMobile, isMobileOpen, toggleMobileSidebar } = useSidebar();
+  const { isMobile, isMobileOpen, toggleHeaderSidebar } = useSidebar();
 
   useEffect(() => {
     if (!isOpen) return;
@@ -47,7 +47,7 @@ function DropdownProfile({
 
   const handleToggleDropdown = () => {
     if (isMobileOpen) {
-      toggleMobileSidebar();
+      toggleHeaderSidebar();
     }
     setIsOpen((prev) => !prev);
   };

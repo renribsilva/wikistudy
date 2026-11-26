@@ -6,7 +6,7 @@ import { useRef } from "react";
 import styles from "./sidebar.module.css";
 
 export function MobileSidebarBackdrop() {
-  const { isMobile, isMobileOpen, toggleMobileSidebar } = useSidebar();
+  const { isMobile, isMobileOpen, toggleHeaderSidebar } = useSidebar();
 
   const touchStartX = useRef<number>(0);
   const touchEndX = useRef<number>(0);
@@ -27,14 +27,14 @@ export function MobileSidebarBackdrop() {
     const minSwipeDistance = 40;
 
     if (swipeDistance > minSwipeDistance) {
-      toggleMobileSidebar();
+      toggleHeaderSidebar();
     }
   };
 
   return (
     <div
       className={clsx(styles.backdrop, isMobileOpen && styles.backdrop_active)}
-      onClick={toggleMobileSidebar}
+      onClick={toggleHeaderSidebar}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}

@@ -15,8 +15,8 @@ interface ThemeProps {
 }
 
 function Theme({
-  width = "18px",
-  height = "18px",
+  width = "20px",
+  height = "20px",
   compact = false,
 }: ThemeProps) {
   const { theme, setTheme } = useTheme();
@@ -31,8 +31,8 @@ function Theme({
   }
 
   const currentTheme = theme ?? "system";
-  const iconSize = compact ? "15px" : width;
-  const iconHeight = compact ? "15px" : height;
+  const iconSize = compact ? "20px" : width;
+  const iconHeight = compact ? "20px" : height;
 
   return (
     <div

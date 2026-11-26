@@ -4,6 +4,7 @@ import { UserProvider } from "@/providers/user-provider";
 import AppHeader from "@/components/tsx/header/header";
 import AppSidebar from "@/components/tsx/sidebar/sidebar";
 import { MobileSidebarBackdrop } from "@/components/tsx/sidebar/sidebar-backdrop";
+import { SidebarMain } from "@/components/tsx/sidebar/sidebar-main";
 import Footer from "@/components/tsx/footer";
 
 export default async function DashboardLayout({
@@ -23,10 +24,10 @@ export default async function DashboardLayout({
         <header className={styles.layout_header}>
           <AppHeader />
         </header>
-        <main className={styles.layout_main}>
+        <SidebarMain>
           {children}
           <Footer />
-        </main>
+        </SidebarMain>
       </div>
     </UserProvider>
   );

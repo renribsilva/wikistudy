@@ -20,17 +20,13 @@ function AppHeader() {
           <MenuButton />
         </div>
       )}
-
-      <Link href="/" className={styles.appheader_wikilogo}>
-        <div>WikiStudy</div>
-      </Link>
-
-      <div className={styles.appheader_profile}>
-        {!isMobile && (
-          <div>
-            <Theme />
-          </div>
-        )}
+      <div className={styles.appheader_wikilogo_container}>
+        <Link href="/" className={styles.appheader_wikilogo}>
+          WikiStudy
+        </Link>
+      </div>
+      <div className={styles.appheader_profile_container}>
+        {!isMobile && <Theme />}
         <div className={styles.appheader_dropdown_wrap}>
           <DropdownProfile
             isAuthenticated={isAuthenticated}

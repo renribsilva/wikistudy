@@ -20,27 +20,37 @@ export const useSidebar = () => {
 };
 
 export const SidebarProvider = ({ children }: { children: ReactNode }) => {
-  const [isExpanded, setIsExpanded] = useState(true);
-  const [isMobileOpen, setIsMobileOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState<boolean | null>(null);
-  const [isSemiMobile, setIsSemiMobile] = useState<boolean | null>(null);
   const [windowWidth, setWindowWidth] = useState<number | null>(null);
+  const [isMobile, setIsMobile] = useState<boolean>(false);
+  const [isSemiMobile, setIsSemiMobile] = useState<boolean>(false);
 
-  const [activeItem, setActiveItem] = useState<string | null>(null);
-  const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
+  // Inicia expandido por padrão
+  const [isExpanded, setIsExpanded] = useState<boolean>(true);
+  const [isMobileOpen, setIsMobileOpen] = useState<boolean>(false);
 
   useEffect(() => {
     const handleResize = (): void => {
-      const mobile = window.innerWidth <= 800;
-      const semiMobile = window.innerWidth <= 1000;
-      setWindowWidth(window.innerWidth);
+      const width = window.innerWidth;
+      const mobile = width <= 720;
+      const semiMobile = width > 720 && width <= 900;
+
+      setWindowWidth(width);
       setIsMobile(mobile);
       setIsSemiMobile(semiMobile);
+
+      // Se entrar em semi-mobile, ajusta para recolhido (68px); em desktop (>900px), expande (250px)
+      if (semiMobile) {
+        setIsExpanded(false);
+      } else if (!mobile) {
+        setIsExpanded(true);
+      }
+
       if (!mobile) {
         setIsMobileOpen(false);
         document.body.style.overflow = "unset";
       }
     };
+
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => {
@@ -49,11 +59,12 @@ export const SidebarProvider = ({ children }: { children: ReactNode }) => {
     };
   }, []);
 
-  const toggleSidebar = (): void => {
+  const toggleExpandSidebar = (): void => {
+    if (isMobile) return;
     setIsExpanded((prev) => !prev);
   };
 
-  const toggleMobileSidebar = (): void => {
+  const toggleHeaderSidebar = (): void => {
     setIsMobileOpen((prev) => {
       const newState = !prev;
       document.body.style.overflow = newState ? "hidden" : "unset";
@@ -61,26 +72,23 @@ export const SidebarProvider = ({ children }: { children: ReactNode }) => {
     });
   };
 
-  const toggleSubmenu = (item: string): void => {
-    setOpenSubmenu((prev) => (prev === item ? null : item));
-  };
+  const effectiveExpanded = isMobile ? false : isExpanded;
+
+  console.log("IsMobile", isMobile);
+  console.log("IsSemiMobile", isSemiMobile);
+  console.log("isExpanded", isExpanded);
+  console.log("isMobileOpen", isMobileOpen);
 
   return (
     <SidebarContext.Provider
       value={{
-        // Estados
+        windowWidth,
         isMobile,
         isSemiMobile,
-        windowWidth,
-        isExpanded: isMobile ? false : isExpanded,
+        isExpanded: effectiveExpanded,
         isMobileOpen,
-        activeItem,
-        openSubmenu,
-        // Funções
-        toggleSidebar,
-        toggleMobileSidebar,
-        setActiveItem,
-        toggleSubmenu,
+        toggleExpandSidebar,
+        toggleHeaderSidebar,
       }}
     >
       {children}

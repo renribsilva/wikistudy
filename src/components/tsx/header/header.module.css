@@ -53,7 +53,7 @@
   z-index: 110;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 720px) {
   .dropdown_list {
     position: fixed;
     top: var(--header-height, 50px);
@@ -82,7 +82,7 @@
   justify-content: space-between;
   gap: 10px;
   width: 100%;
-  height: 32px;
+  height: 40px;
   padding: 6px 6px;
   border: 0;
   border-radius: 8px;
@@ -134,7 +134,7 @@
 .dropdown_divider {
   width: 100%;
   height: 1px;
-  margin: 4px 0px;
+  margin: 4px 2px;
   border: 0;
   background-color: var(--border-button);
 }
@@ -176,87 +176,82 @@
   background-color: var(--panel);
   height: 60px;
   width: 100%;
-  padding: 10px;
   box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding-inline: 10px;
   position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 75;
   border-bottom: 1px solid var(--background);
 }
 
 .appheader_menu_container {
-  /* background-color: rgb(61, 196, 196); */
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.appheader_wikilogo_container {
+  height: 100%;
+  padding-inline: 10px;
 }
 
 .appheader_wikilogo {
-  /* background-color: blueviolet; */
   height: 100%;
   display: flex;
   align-items: center;
-  justify-content: left;
+  justify-content: flex-start;
   font-size: 24px;
   color: var(--foreground);
   text-decoration: none;
+  white-space: nowrap;
 }
 
-@media (max-width: 800px) {
-  .appheader_wikilogo {
-    justify-content: center;
-  }
-}
-
-.appheader_profile {
+.appheader_profile_container {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
   padding-right: 10px;
   display: flex;
   gap: 20px;
   align-items: center;
+  justify-content: flex-end;
 }
 
-.appheader_profile_user {
-  display: flex;
-  gap: 5px;
-  align-items: center;
-  justify-content: center;
-}
+@media (max-width: 720px) {
+  .appheader_container {
+    display: grid;
+    grid-template-columns: 60px minmax(0, 1fr) 60px;
+    align-items: center;
+  }
 
-.appheader_profile_user_login,
-.appheader_profile_user_signup {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: 35px;
-  padding: 0px 14px 1px 14px;
-  border-radius: 99px;
-  font-size: 14px;
-  font-weight: 600;
-  white-space: nowrap;
-  text-decoration: none;
-  cursor: pointer;
-  box-sizing: border-box;
-}
+  .appheader_menu_container {
+    grid-column: 1;
+    height: 100%;
+    justify-content: flex-start;
+  }
 
-.appheader_profile_user_login {
-  border: 1px solid var(--border-button);
-  background-color: transparent;
-  color: inherit;
-}
+  .appheader_wikilogo_container {
+    grid-column: 2;
+    width: 100%;
+    min-width: 0;
+    flex-shrink: 1;
+    justify-content: center;
+  }
 
-.appheader_profile_user_signup {
-  background-color: var(--foreground);
-  color: var(--background);
-  border: 1px solid transparent; /* iguala a altura interna ao botão login */
-}
+  .appheader_wikilogo {
+    justify-content: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 
-.appheader_dropdown_wrap {
-  display: flex;
-  align-items: center;
-}
-
-.appheader_dropdown_wrap > div > [role="menu"],
-.appheader_dropdown_wrap [data-dropdown-menu] {
-  margin-top: 6px;
+  .appheader_profile_container {
+    flex: none;
+    justify-content: flex-end;
+  }
 }
 
 /*****************************************/
