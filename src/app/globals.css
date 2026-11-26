@@ -7,7 +7,7 @@
   --color-border-button-light: #ced0d5;
 
   /* --- TEMA DARK --- */
-  --color-fill-dark: hsl(240, 10%, 4%);
+  --color-fill-dark: #18181b;
   --color-text-base-dark: hsl(0, 0%, 98%);
   --color-text-muted-dark: hsl(240, 4%, 65%);
   --color-panel-dark: hsl(240, 8%, 16%);
