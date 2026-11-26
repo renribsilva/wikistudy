@@ -13,15 +13,20 @@
   z-index: 50;
   opacity: 0;
   visibility: hidden;
+  pointer-events: none;
   transition:
     opacity 0.3s ease-in-out,
-    visibility 0.3s ease-in-out;
+    visibility 0s linear 0.3s;
 }
 
 /* Quando o backdrop estiver ativo */
 .backdrop_active {
   opacity: 1;
   visibility: visible;
+  pointer-events: auto;
+  transition:
+    opacity 0.3s ease-in-out,
+    visibility 0s linear 0s;
 }
 
 /************************************/
@@ -49,12 +54,11 @@
     width: 68px;
   }
 
-  /* Entre 640px e 800px: abre a aba intermediária */
+  /* Faixa intermediária (720px a 900px) */
   @media (min-width: 720px) and (max-width: 900px) {
     position: fixed;
     left: 0;
     top: 60px;
-    width: 68px;
     height: calc(100dvh - 60px);
     transform: translateX(0);
     visibility: visible;
@@ -62,27 +66,39 @@
     z-index: 40;
   }
 
-  /* Abaixo de 640px: escondida por padrão */
-  @media (max-width: 720px) {
-    &:not(.appsidebar_mobile_open) {
-      display: none;
-    }
-  }
-}
-
-.appsidebar_mobile_open {
+  /* Mobile (até 720px): escondida fora da tela sem display: none para animar */
   @media (max-width: 720px) {
     position: fixed;
     left: 0;
     top: 60px;
     width: 250px;
     height: calc(100dvh - 60px);
+    transform: translateX(-100%);
+    visibility: hidden;
+    pointer-events: none;
+    z-index: 50;
+    transition:
+      transform 0.3s ease-in-out,
+      visibility 0s linear 0.3s;
+  }
+}
+
+@media (min-width: 720px) and (max-width: 900px) {
+  .appsidebar_container:not(.appsidebar_semi_expanded) {
+    width: 250px;
+  }
+
+  .appsidebar_container.appsidebar_semi_expanded {
+    width: 68px;
+  }
+}
+
+@media (max-width: 720px) {
+  .appsidebar_container.appsidebar_mobile_open {
     transform: translateX(0);
     visibility: visible;
     pointer-events: auto;
-    z-index: 50;
     transition:
-      width 0.2s ease,
       transform 0.3s ease-in-out,
       visibility 0s linear 0s;
   }
@@ -138,27 +154,6 @@
 
 .appsidebar_footer {
   padding-block: 15px;
-}
-
-@media (min-width: 720px) and (max-width: 900px) {
-  .appsidebar_container {
-    position: fixed;
-    left: 0;
-    top: 60px;
-    height: calc(100dvh - 60px);
-    transform: translateX(0);
-    visibility: visible;
-    pointer-events: auto;
-    z-index: 40;
-  }
-
-  .appsidebar_container:not(.appsidebar_semi_expanded) {
-    width: 250px;
-  }
-
-  .appsidebar_container.appsidebar_semi_expanded {
-    width: 68px;
-  }
 }
 
 /***********************************************/

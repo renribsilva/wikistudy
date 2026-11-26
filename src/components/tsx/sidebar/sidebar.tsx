@@ -9,12 +9,8 @@ function AppSidebar() {
   const { isMobileOpen, isMobile, isExpanded, toggleExpandSidebar } =
     useSidebar();
 
-  if (isMobile && !isMobileOpen) {
-    return null;
-  }
-
   const isMobileDrawerOpen = Boolean(isMobile && isMobileOpen);
-  const isSemi = !isMobileDrawerOpen && !isExpanded;
+  const isSemi = !isMobile && !isExpanded;
 
   const sidebarClass = [
     styles.appsidebar_container,
@@ -32,7 +28,10 @@ function AppSidebar() {
     .join(" ");
 
   return (
-    <aside className={sidebarClass}>
+    <aside
+      className={sidebarClass}
+      aria-hidden={isMobile ? !isMobileDrawerOpen : false}
+    >
       {!isMobile && (
         <div className={topperClass}>
           <button
