@@ -32,7 +32,7 @@
   border: 0;
   border-radius: 999px;
   background-color: transparent;
-  color: var(--text-muted);
+  color: var(--text-secondary);
   cursor: pointer;
   transition:
     background-color 0.15s ease,
@@ -40,13 +40,13 @@
 }
 
 .theme_button:hover {
-  background-color: color-mix(in srgb, var(--foreground) 6%, transparent);
-  color: var(--foreground);
+  background-color: color-mix(in srgb, var(--text-primary) 6%, transparent);
+  color: var(--text-primary);
 }
 
 .theme_button_active {
-  background-color: color-mix(in srgb, var(--foreground) 11%, transparent);
-  color: var(--foreground);
+  background-color: color-mix(in srgb, var(--accent) 14%, transparent);
+  color: var(--text-primary);
 }
 
 /***************************************************/
@@ -61,8 +61,8 @@
   margin-bottom: 12px;
   border-radius: 8px;
   border: 1px solid var(--border-button);
-  background-color: var(--panel);
-  color: inherit;
+  background-color: var(--background-secondary);
+  color: var(--text-primary);
   height: 40px;
   font-size: 0.875rem;
   font-weight: 500;
@@ -75,7 +75,7 @@
 }
 
 .back_button:hover {
-  background-color: var(--background);
+  background-color: var(--background-primary);
 }
 
 .back_button:active {
@@ -83,7 +83,7 @@
 }
 
 .back_button:focus-visible {
-  outline: 2px solid var(--tick);
+  outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
 
@@ -122,7 +122,7 @@
   border: 0;
   border-radius: 999px;
   background-color: transparent;
-  color: var(--text-muted);
+  color: var(--text-secondary);
   text-decoration: none;
   cursor: pointer;
   transition:
@@ -131,18 +131,18 @@
 }
 
 .home_button:hover {
-  background-color: color-mix(in srgb, var(--foreground) 6%, transparent);
-  color: var(--foreground);
+  background-color: color-mix(in srgb, var(--text-primary) 6%, transparent);
+  color: var(--text-primary);
 }
 
 .home_button_active {
-  background-color: color-mix(in srgb, var(--foreground) 11%, transparent);
-  color: var(--foreground);
+  background-color: color-mix(in srgb, var(--accent) 14%, transparent);
+  color: var(--text-primary);
 }
 
-/**********************************************************/
-/*******************GOOGLELIGHT BUTTON*********************/
-/**********************************************************/
+/*****************************************************/
+/*******************GOOGLE BUTTON*********************/
+/*****************************************************/
 
 .gsi-material-button {
   -moz-user-select: none;
@@ -235,11 +235,6 @@
 .gsi-material-button:focus .gsi-material-button-state {
   background-color: var(--google-state-bg);
   opacity: var(--google-active-opacity);
-}
-
-.gsi-material-button:hover {
-  -webkit-box-shadow: var(--google-shadow);
-  box-shadow: var(--google-shadow);
 }
 
 .gsi-material-button:hover .gsi-material-button-state {

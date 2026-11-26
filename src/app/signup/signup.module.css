@@ -4,8 +4,8 @@
   align-items: center;
   justify-content: center;
   padding: 2rem 1rem;
-  background-color: var(--background);
-  color: var(--foreground);
+  background-color: var(--background-primary);
+  color: var(--text-primary);
   box-sizing: border-box;
 }
 
@@ -14,7 +14,7 @@
   max-width: 400px;
   padding: 2rem;
   border-radius: 12px;
-  background-color: var(--panel);
+  background-color: var(--background-secondary);
   border: 1px solid var(--border-button);
   box-sizing: border-box;
 }
@@ -31,7 +31,7 @@
   margin: 1.25rem 0 0;
   font-size: 0.8125rem;
   line-height: 1.55;
-  color: var(--foreground, inherit);
+  color: var(--text-secondary);
   text-align: center;
 }
 
@@ -58,10 +58,11 @@
   border-top: 1px solid var(--border-button);
   font-size: 0.875rem;
   text-align: center;
+  color: var(--text-secondary);
 }
 
 .signup_card a {
-  color: var(--foreground);
+  color: var(--text-primary);
   text-decoration: underline;
   text-underline-offset: 3px;
 }

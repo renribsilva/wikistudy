@@ -40,7 +40,7 @@
 
 .legal_nav_ul {
   padding: 0;
-  color: var(--text-muted);
+  color: var(--text-secondary);
   display: flex;
   flex-direction: column;
   gap: 8px; /* espaço entre cada item da lista */
@@ -63,13 +63,13 @@
 
 .legal_nav_a:hover,
 .legal_nav_a:active {
-  color: var(--foreground);
+  color: var(--text-primary);
   text-decoration: none;
 }
 
 .legal_nav_a_active,
 .legal_nav_a[data-active="true"] {
-  color: var(--foreground);
+  color: var(--text-primary);
   font-weight: 600;
 }
 
@@ -98,7 +98,7 @@
 
 .policy_updated {
   margin: 0 0 1.5rem;
-  color: var(--text-muted);
+  color: var(--text-secondary);
 }
 
 .policy_lead {
@@ -126,7 +126,7 @@
   overflow-x: auto;
   border: 1px solid var(--border-button);
   border-radius: 8px;
-  background-color: var(--panel);
+  background-color: var(--background-secondary);
 }
 
 .policy_table {
@@ -137,7 +137,7 @@
 
 .policy_table th {
   font-weight: 600;
-  background-color: var(--background);
+  background-color: var(--background-primary);
 }
 
 .policy_table th,
@@ -155,12 +155,12 @@
   font-size: 0.8rem;
   padding: 0.15em 0.4em;
   border-radius: 4px;
-  background-color: var(--panel);
+  background-color: var(--background-secondary);
   border: 1px solid var(--border-button);
 }
 
 .policy_article a {
-  color: var(--foreground);
+  color: var(--text-primary);
   text-decoration: underline;
 }
 

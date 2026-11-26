@@ -1,5 +1,6 @@
 import { sql } from "drizzle-orm";
 import { pgTable, smallint, text, timestamp, uuid } from "drizzle-orm/pg-core";
+import { OptionalTheme } from "../themes/themes-config";
 
 /**
  * Lista de papéis de acesso permitidos para usuários na aplicação.
@@ -93,4 +94,33 @@ export const passwordResetTokens = pgTable("password_reset_tokens", {
 
   /** Data e hora de criação do registro (preenchida automaticamente pelo banco). */
   createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+/**
+ * Tabela `user_preferences` no PostgreSQL (via Drizzle ORM).
+ *
+ * Armazena preferências de interface e experiência de cada usuário,
+ * isoladas da tabela principal `users`.
+ *
+ * @remarks
+ * - Relação 1:1 com `users` via `userId` (`unique()` + `onDelete: "cascade"`).
+ * - A coluna `theme` define o tema visual escolhido pelo usuário.
+ */
+export const userPreferences = pgTable("user_preferences", {
+  /** Identificador único do registro de preferência (`UUID PRIMARY KEY`, gerado pelo Postgres via `uuidv7()`). */
+  id: uuid("id")
+    .default(sql`uuidv7()`)
+    .primaryKey(),
+
+  /** Referência única ao usuário (`users.id`) dono das preferências; remove em cascata ao excluir o usuário. */
+  userId: uuid("user_id")
+    .notNull()
+    .unique()
+    .references(() => users.id, { onDelete: "cascade" }),
+
+  /** Tema de interface escolhido pelo usuário; padrão `'tokyonight'`. */
+  theme: text("theme").$type<OptionalTheme | null>(),
+
+  /** Data e hora da última atualização da preferência. */
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });

@@ -3,7 +3,7 @@
 /************************************************/
 
 .face_card {
-  background-color: var(--panel);
+  background-color: var(--background-secondary);
   border: 1px solid var(--border-button);
   border-radius: 12px;
   padding: 1.25rem;
@@ -16,12 +16,13 @@
   margin: 0;
   font-size: 1.1rem;
   font-weight: 600;
+  color: var(--text-primary);
 }
 
 .face_description {
   margin: 0;
   font-size: 0.9rem;
-  opacity: 0.8;
+  color: var(--text-secondary);
 }
 
 .face_grid {
@@ -37,7 +38,7 @@
   aspect-ratio: 1 / 1;
   padding: 0.65rem;
   border-radius: 10px;
-  border: 1px solid rgba(128, 128, 128, 0.35);
+  border: 1px solid var(--border-button);
   background: transparent;
   cursor: pointer;
   transition:
@@ -47,14 +48,14 @@
 }
 
 .face_option:hover:not(:disabled) {
-  border-color: currentColor;
+  border-color: var(--accent);
   transform: translateY(-1px);
 }
 
 .face_option_active {
   border-width: 2px;
-  border-color: currentColor;
-  background-color: rgba(128, 128, 128, 0.12);
+  border-color: var(--accent);
+  background-color: color-mix(in srgb, var(--accent) 12%, transparent);
 }
 
 .face_option:disabled {
@@ -82,7 +83,7 @@
 /************************************************/
 
 .name_card {
-  background-color: var(--panel);
+  background-color: var(--background-secondary);
   border: 1px solid var(--border-button);
   border-radius: 12px;
   padding: 1.25rem;
@@ -95,12 +96,13 @@
   margin: 0;
   font-size: 1.1rem;
   font-weight: 600;
+  color: var(--text-primary);
 }
 
 .name_description {
   margin: 0;
   font-size: 0.9rem;
-  opacity: 0.8;
+  color: var(--text-secondary);
 }
 
 .name_form {
@@ -113,18 +115,18 @@
   flex: 1 1 220px;
   padding: 0.6rem 0.75rem;
   border-radius: 8px;
-  border: 1px solid rgba(128, 128, 128, 0.45);
+  border: 1px solid var(--border-button);
   background: transparent;
-  color: inherit;
+  color: var(--text-primary);
   font-size: 0.95rem;
 }
 
 .name_button {
   padding: 0.6rem 1rem;
   border-radius: 8px;
-  border: 1px solid currentColor;
+  border: 1px solid var(--border-button);
   background: transparent;
-  color: inherit;
+  color: var(--text-primary);
   font-size: 0.9rem;
   font-weight: 500;
   cursor: pointer;
@@ -138,6 +140,7 @@
 .name_status {
   margin: 0;
   font-size: 0.875rem;
+  color: var(--text-secondary);
 }
 
 .name_error {
@@ -154,7 +157,7 @@
 /*************************************************/
 
 .delete_card {
-  background-color: var(--panel);
+  background-color: var(--background-secondary);
   border: 1px solid var(--border-button);
   border-radius: 12px;
   padding: 1.25rem;
@@ -173,7 +176,7 @@
 .delete_description {
   margin: 0;
   font-size: 0.9rem;
-  opacity: 0.85;
+  color: var(--text-secondary);
 }
 
 .delete_actions {
@@ -201,9 +204,9 @@
 .delete_secondary_button {
   padding: 0.6rem 1rem;
   border-radius: 8px;
-  border: 1px solid currentColor;
+  border: 1px solid var(--border-button);
   background: transparent;
-  color: inherit;
+  color: var(--text-primary);
   font-size: 0.9rem;
   font-weight: 500;
   cursor: pointer;

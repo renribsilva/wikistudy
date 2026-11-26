@@ -34,8 +34,8 @@
 /************************************/
 
 .appsidebar_container {
-  background-color: var(--panel);
-  border-right: 1px solid var(--background);
+  background-color: var(--background-secondary);
+  border-right: 1px solid var(--border-button);
   width: 250px;
   height: 100%;
   padding: 10px;
@@ -113,13 +113,13 @@
   border: none;
   border-radius: 8px;
   background: transparent;
-  color: var(--text-muted);
+  color: var(--text-secondary);
   cursor: pointer;
 }
 
 .appsidebar_toggle_btn:hover {
-  background-color: var(--tab-hover);
-  color: var(--foreground);
+  background-color: color-mix(in srgb, var(--text-primary) 6%, transparent);
+  color: var(--text-primary);
 }
 
 .appsidebar_hr_box {
@@ -128,7 +128,7 @@
 
 .appsidebar_hr {
   border: none;
-  border-top: 0.5px solid var(--tick);
+  border-top: 0.5px solid var(--border-button);
   width: 100%;
   opacity: 0.3;
 }

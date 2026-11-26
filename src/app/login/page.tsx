@@ -52,7 +52,7 @@ function LoginContent() {
               id="email"
               name="email"
               type="email"
-              autoComplete="email"
+              autoComplete="username"
               required
               className={styles.field_input}
             />

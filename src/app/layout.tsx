@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 import { SidebarProvider } from "@/providers/sidebar-provider";
 import { Plus_Jakarta_Sans } from "next/font/google";
+import { OPTIONAL_THEMES } from "./lib/themes/themes-config";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -62,6 +63,7 @@ function RootLayout({ children }: { children: React.ReactNode }) {
           attribute="class"
           defaultTheme="system"
           enableSystem={true}
+          themes={["system", "light", "dark", ...OPTIONAL_THEMES]}
           disableTransitionOnChange
         >
           <SidebarProvider>{children}</SidebarProvider>

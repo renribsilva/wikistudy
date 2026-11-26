@@ -1,35 +1,68 @@
 :root {
   /* --- TEMA LIGHT --- */
-  --color-fill-light: hsl(0, 0%, 95%);
-  --color-text-base-light: hsl(240, 2%, 10%);
-  --color-text-muted-light: hsl(240, 3%, 42%);
-  --color-panel-light: hsl(0, 0%, 100%);
+  --color-bg-primary-light: hsl(0, 0%, 95%);
+  --color-bg-secondary-light: hsl(0, 0%, 100%);
+  --color-txt-primary-light: hsl(240, 2%, 10%);
+  --color-txt-secondary-light: hsl(240, 3%, 42%);
   --color-border-button-light: #ced0d5;
+  --color-accent-light: #3284eb;
 
   /* --- TEMA DARK --- */
-  --color-fill-dark: #18181b;
-  --color-text-base-dark: hsl(0, 0%, 98%);
-  --color-text-muted-dark: hsl(240, 4%, 65%);
-  --color-panel-dark: hsl(240, 8%, 16%);
+  --color-bg-primary-dark: #1e1f3c;
+  --color-bg-secondary-dark: hsl(240, 8%, 16%);
+  --color-txt-primary-dark: hsl(0, 0%, 98%);
+  --color-txt-secondary-dark: hsl(240, 4%, 65%);
   --color-border-button-dark: #515147;
+  --color-accent-dark: #f97316;
 
-  /* --- GOOGLE BUTTON (padrão light) --- */
-  --google-bg: #ffffff;
-  --google-text: #1f1f1f;
-  --google-border: #747775;
-  --google-state-bg: #303030;
-  --google-hover-opacity: 8%;
-  --google-active-opacity: 12%;
-  --google-shadow:
-    0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+  /* --- TEMA TOKYONIGHT --- */
+  --color-bg-primary-tokyonight: #16161e;
+  --color-bg-secondary-tokyonight: #1a1b26;
+  --color-txt-primary-tokyonight: #c0caf5;
+  --color-txt-secondary-tokyonight: #7982a9;
+  --color-border-button-tokyonight: #292e42;
+  --color-accent-tokyonight: #7aa2f7;
+
+  /* --- TEMA CAFETERIA --- */
+  --color-bg-primary-cafeteria: #f7f3eb;
+  --color-bg-secondary-cafeteria: #e8dccb;
+  --color-txt-primary-cafeteria: #3e3028;
+  --color-txt-secondary-cafeteria: #806b5b;
+  --color-border-button-cafeteria: #b28a65;
+  --color-accent-cafeteria: #596333;
+
+  /* --- TEMA SAVANA --- */
+  --color-bg-primary-savana: #16120e;
+  --color-bg-secondary-savana: #211a14;
+  --color-txt-primary-savana: #f4e8d1;
+  --color-txt-secondary-savana: #b89f7d;
+  --color-border-button-savana: #3b2d21;
+  --color-accent-savana: #e09f3e;
+
+  /* --- TEMA TERRACOTA --- */
+  --color-bg-primary-terracota: #f7efe6;
+  --color-bg-secondary-terracota: #ede0d1;
+  --color-txt-primary-terracota: #231914;
+  --color-txt-secondary-terracota: #6e5649;
+  --color-border-button-terracota: #d6c3b0;
+  --color-accent-terracota: #c84b31;
+
+  /* --- PADRÃO INICIAL (fallback) --- */
+  --background-primary: var(--color-bg-primary-light);
+  --background-secondary: var(--color-bg-secondary-light);
+  --text-primary: var(--color-txt-primary-light);
+  --text-secondary: var(--color-txt-secondary-light);
+  --border-button: var(--color-border-button-light);
+  --accent: #3284eb;
 }
 
 .dark {
-  --background: var(--color-fill-dark);
-  --foreground: var(--color-text-base-dark);
-  --text-muted: var(--color-text-muted-dark);
-  --panel: var(--color-panel-dark);
+  --background-primary: var(--color-bg-primary-dark);
+  --background-secondary: var(--color-bg-secondary-dark);
+  --text-primary: var(--color-txt-primary-dark);
+  --text-secondary: var(--color-txt-secondary-dark);
   --border-button: var(--color-border-button-dark);
+  --accent: var(--color-accent-dark);
 
   --google-bg: #131314;
   --google-text: #e3e3e3;
@@ -37,16 +70,15 @@
   --google-state-bg: #ffffff;
   --google-hover-opacity: 8%;
   --google-active-opacity: 12%;
-  --google-shadow:
-    0 1px 2px 0 rgba(0, 0, 0, 0.45), 0 1px 3px 1px rgba(0, 0, 0, 0.25);
 }
 
 .light {
-  --background: var(--color-fill-light);
-  --foreground: var(--color-text-base-light);
-  --text-muted: var(--color-text-muted-light);
-  --panel: var(--color-panel-light);
+  --background-primary: var(--color-bg-primary-light);
+  --background-secondary: var(--color-bg-secondary-light);
+  --text-primary: var(--color-txt-primary-light);
+  --text-secondary: var(--color-txt-secondary-light);
   --border-button: var(--color-border-button-light);
+  --accent: var(--color-accent-light);
 
   --google-bg: #ffffff;
   --google-text: #1f1f1f;
@@ -54,13 +86,75 @@
   --google-state-bg: #303030;
   --google-hover-opacity: 8%;
   --google-active-opacity: 12%;
-  --google-shadow:
-    0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
 }
 
+.tokyonight {
+  --background-primary: var(--color-bg-primary-tokyonight);
+  --background-secondary: var(--color-bg-secondary-tokyonight);
+  --text-primary: var(--color-txt-primary-tokyonight);
+  --text-secondary: var(--color-txt-secondary-tokyonight);
+  --border-button: var(--color-border-button-tokyonight);
+  --accent: var(--color-accent-tokyonight);
+
+  --google-bg: #16161e;
+  --google-text: #c0caf5;
+  --google-border: var(--color-border-button-tokyonight);
+  --google-state-bg: #7aa2f7;
+  --google-hover-opacity: 10%;
+  --google-active-opacity: 16%;
+}
+
+.cafeteria {
+  --background-primary: var(--color-bg-primary-cafeteria);
+  --background-secondary: var(--color-bg-secondary-cafeteria);
+  --text-primary: var(--color-txt-primary-cafeteria);
+  --text-secondary: var(--color-txt-secondary-cafeteria);
+  --border-button: var(--color-border-button-cafeteria);
+  --accent: var(--color-accent-cafeteria);
+
+  --google-bg: #f2e6d8;
+  --google-text: #593e2e;
+  --google-border: var(--color-border-button-cafeteria);
+  --google-state-bg: #555934;
+  --google-hover-opacity: 10%;
+  --google-active-opacity: 16%;
+}
+
+.savana {
+  --background-primary: var(--color-bg-primary-savana);
+  --background-secondary: var(--color-bg-secondary-savana);
+  --text-primary: var(--color-txt-primary-savana);
+  --text-secondary: var(--color-txt-secondary-savana);
+  --border-button: var(--color-border-button-savana);
+  --accent: var(--color-accent-savana);
+
+  --google-bg: #16120e;
+  --google-text: #f4e8d1;
+  --google-border: var(--color-border-button-savana);
+  --google-state-bg: #e09f3e;
+  --google-hover-opacity: 10%;
+  --google-active-opacity: 16%;
+}
+
+.terracota {
+  --background-primary: var(--color-bg-primary-terracota);
+  --background-secondary: var(--color-bg-secondary-terracota);
+  --text-primary: var(--color-txt-primary-terracota);
+  --text-secondary: var(--color-txt-secondary-terracota);
+  --border-button: var(--color-border-button-terracota);
+  --accent: var(--color-accent-terracota);
+
+  --google-bg: #f7efe6;
+  --google-text: #231914;
+  --google-border: var(--color-border-button-terracota);
+  --google-state-bg: #c84b31;
+  --google-hover-opacity: 8%;
+  --google-active-opacity: 14%;
+}
 html,
 body {
-  background-color: var(--background);
+  background-color: var(--background-primary);
+  color: var(--text-primary);
   margin: 0;
   height: 100%;
   min-width: 340px;

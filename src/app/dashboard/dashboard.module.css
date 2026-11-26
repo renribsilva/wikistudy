@@ -3,7 +3,7 @@
 /***********************************/
 
 .layout_container {
-  background-color: var(--background);
+  background-color: var(--background-primary);
   display: flex;
   height: 100svh;
   width: 100svw;

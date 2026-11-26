@@ -11,6 +11,7 @@ import Logout from "@/components/svg/logout";
 import Home from "@/components/svg/home";
 import Theme from "../buttons/theme-button";
 import GoogleSignInButton from "../buttons/google-button";
+import Palette from "@/components/svg/palette";
 
 interface DropdownProfileProps {
   isAuthenticated?: boolean;
@@ -100,6 +101,16 @@ function DropdownProfile({
                     <Home width="20px" height="20px" />
                   </div>
                 </Link>
+                <Link
+                  href="/dashboard/account/appearance"
+                  className={styles.dropdown_list_button}
+                  onClick={() => setIsOpen(false)}
+                >
+                  <div>Aparência</div>
+                  <div className={styles.dropdown_list_icon}>
+                    <Palette width="20px" height="20px" />
+                  </div>
+                </Link>
                 {isMobile && (
                   <div className={styles.dropdown_list_button}>
                     <div>Tema</div>
@@ -131,6 +142,7 @@ function DropdownProfile({
                 <div className={styles.oauth_divider}>
                   <span>ou</span>
                 </div>
+
                 <Link
                   href="/login"
                   className={styles.dropdown_auth_login}

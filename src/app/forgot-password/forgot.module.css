@@ -4,8 +4,8 @@
   align-items: center;
   justify-content: center;
   padding: 2rem 1rem;
-  background-color: var(--background);
-  color: var(--foreground);
+  background-color: var(--background-primary);
+  color: var(--text-primary);
   box-sizing: border-box;
 }
 
@@ -14,7 +14,7 @@
   max-width: 400px;
   padding: 2rem;
   border-radius: 12px;
-  background-color: var(--panel);
+  background-color: var(--background-secondary);
   border: 1px solid var(--border-button);
   box-sizing: border-box;
 }
@@ -43,7 +43,7 @@
 .field_label {
   font-size: 0.875rem;
   font-weight: 500;
-  color: var(--foreground);
+  color: var(--text-primary);
 }
 
 .field_input {
@@ -51,8 +51,8 @@
   padding: 0.65rem 0.75rem;
   font-size: 0.9375rem;
   line-height: 1.4;
-  color: var(--foreground);
-  background-color: var(--background);
+  color: var(--text-primary);
+  background-color: var(--background-primary);
   border: 1px solid var(--border-button);
   border-radius: 8px;
   box-sizing: border-box;
@@ -66,9 +66,9 @@
 .field_input:-webkit-autofill:focus,
 .field_input:-webkit-autofill:active,
 .field_input:autofill {
-  -webkit-text-fill-color: var(--foreground);
-  caret-color: var(--foreground);
-  box-shadow: 0 0 0 1000px var(--background) inset;
+  -webkit-text-fill-color: var(--text-primary);
+  caret-color: var(--text-primary);
+  box-shadow: 0 0 0 1000px var(--background-primary) inset;
   transition:
     background-color 50000s ease-in-out 0s,
     border-color 0.15s ease,
@@ -77,8 +77,8 @@
 
 .field_input:focus {
   outline: none;
-  border-color: var(--foreground);
-  box-shadow: 0 0 0 2px color-mix(in srgb, var(--foreground) 12%, transparent);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 20%, transparent);
 }
 
 .field_error {
@@ -105,9 +105,9 @@
   padding: 0.7rem 1rem;
   font-size: 0.9375rem;
   font-weight: 600;
-  color: var(--background);
-  background-color: var(--foreground);
-  border: 1px solid var(--foreground);
+  color: var(--background-primary);
+  background-color: var(--accent);
+  border: 1px solid var(--accent);
   border-radius: 8px;
   cursor: pointer;
   transition: opacity 0.15s ease;
@@ -128,10 +128,11 @@
   border-top: 1px solid var(--border-button);
   font-size: 0.875rem;
   text-align: center;
+  color: var(--text-secondary);
 }
 
 .login_card a {
-  color: var(--foreground);
+  color: var(--text-primary);
   text-decoration: underline;
   text-underline-offset: 3px;
 }
@@ -153,7 +154,7 @@
   font-size: 0.875rem;
   line-height: 1.4;
   border-radius: 8px;
-  color: var(--foreground);
-  background-color: color-mix(in srgb, var(--foreground) 6%, transparent);
+  color: var(--text-primary);
+  background-color: color-mix(in srgb, var(--accent) 8%, transparent);
   border: 1px solid var(--border-button);
 }

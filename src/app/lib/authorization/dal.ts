@@ -7,6 +7,8 @@ import { db } from "@/app/lib/database/db";
 import { users } from "@/app/lib/database/schema";
 import { decrypt } from "@/app/lib/session/session-cryto";
 import { decryptEmail } from "@/app/lib/auth/email-crypto";
+import { userPreferences } from "@/app/lib/database/schema";
+import { OPTIONAL_THEMES, OptionalTheme } from "../themes/themes-config";
 
 /**
  * Valida a sessão atual a partir do cookie `session` e retorna o `userId` autenticado.
@@ -98,6 +100,87 @@ export const getUser = cache(async () => {
     };
   } catch {
     console.error("Failed to fetch user");
+    return null;
+  }
+});
+
+/**
+ * Normaliza o tema opcional vindo do banco (`user_preferences.theme`).
+ *
+ * `light`, `dark` e `system` são tratados pelo `next-themes` no cliente e não ficam salvos
+ * como tema opcional no banco. Se não houver tema opcional válido (ou for `null`), retorna `null`.
+ */
+function normalizeOptionalTheme(
+  value: string | null | undefined,
+): OptionalTheme | null {
+  if (value && (OPTIONAL_THEMES as readonly string[]).includes(value)) {
+    return value as OptionalTheme;
+  }
+  return null;
+}
+
+/**
+ * Busca o tema opcional do usuário autenticado sem redirecionar quando anônimo.
+ *
+ * Ideal para rotas híbridas (como `/dashboard`):
+ * - Sem sessão: retorna `null`.
+ * - Com sessão e sem tema opcional salvo (`theme` nulo ou sem linha): retorna `{ theme: null, updatedAt: null }`.
+ * - Com sessão e tema opcional salvo (ex.: `"tokyonight"`): retorna `{ theme: "tokyonight", updatedAt }`.
+ */
+export const getOptionalUserPreferences = cache(async () => {
+  const user = await getOptionalUser();
+  if (!user?.id) {
+    return null;
+  }
+
+  try {
+    const [pref] = await db
+      .select({
+        theme: userPreferences.theme,
+        updatedAt: userPreferences.updatedAt,
+      })
+      .from(userPreferences)
+      .where(eq(userPreferences.userId, user.id))
+      .limit(1);
+
+    return {
+      theme: normalizeOptionalTheme(pref?.theme),
+      updatedAt: pref?.updatedAt ?? null,
+    };
+  } catch (error) {
+    console.error("Failed to fetch optional user preferences", error);
+    return {
+      theme: null,
+      updatedAt: null,
+    };
+  }
+});
+
+/**
+ * Busca o tema opcional do usuário autenticado exigindo sessão válida.
+ *
+ * Chama `verifySession()` (redireciona se a sessão for ausente ou inválida) e retorna
+ * o tema opcional (`"tokyonight"` ou `null`) para o usuário logado.
+ */
+export const getUserPreferences = cache(async () => {
+  const session = await verifySession();
+
+  try {
+    const [pref] = await db
+      .select({
+        theme: userPreferences.theme,
+        updatedAt: userPreferences.updatedAt,
+      })
+      .from(userPreferences)
+      .where(eq(userPreferences.userId, session.userId))
+      .limit(1);
+
+    return {
+      theme: normalizeOptionalTheme(pref?.theme),
+      updatedAt: pref?.updatedAt ?? null,
+    };
+  } catch (error) {
+    console.error("Failed to fetch user preferences", error);
     return null;
   }
 });

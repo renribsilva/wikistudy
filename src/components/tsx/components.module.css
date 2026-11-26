@@ -23,7 +23,7 @@
 .field_label {
   font-size: 0.875rem;
   font-weight: 500;
-  color: var(--foreground);
+  color: var(--text-primary);
 }
 
 .field_input {
@@ -31,8 +31,8 @@
   padding: 0.55rem 0.75rem;
   font-size: 0.9375rem;
   line-height: 1.35;
-  color: var(--foreground);
-  background-color: var(--background);
+  color: var(--text-primary);
+  background-color: var(--background-primary);
   border: 1px solid var(--border-button);
   border-radius: 8px;
   box-sizing: border-box;
@@ -46,9 +46,9 @@
 .field_input:-webkit-autofill:focus,
 .field_input:-webkit-autofill:active,
 .field_input:autofill {
-  -webkit-text-fill-color: var(--foreground);
-  caret-color: var(--foreground);
-  box-shadow: 0 0 0 1000px var(--background) inset;
+  -webkit-text-fill-color: var(--text-primary);
+  caret-color: var(--text-primary);
+  box-shadow: 0 0 0 1000px var(--background-primary) inset;
   transition:
     background-color 50000s ease-in-out 0s,
     border-color 0.15s ease,
@@ -57,8 +57,8 @@
 
 .field_input:focus {
   outline: none;
-  border-color: var(--foreground);
-  box-shadow: 0 0 0 2px color-mix(in srgb, var(--foreground) 12%, transparent);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 20%, transparent);
 }
 
 .field_error {
@@ -105,9 +105,9 @@
   padding: 0.6rem 1rem;
   font-size: 0.9375rem;
   font-weight: 600;
-  color: var(--background);
-  background-color: var(--foreground);
-  border: 1px solid var(--foreground);
+  color: var(--background-primary);
+  background-color: var(--accent);
+  border: 1px solid var(--accent);
   border-radius: 8px;
   cursor: pointer;
   transition: opacity 0.15s ease;
@@ -172,7 +172,7 @@
   flex-direction: column;
   align-items: center;
   gap: 8px;
-  color: var(--text-muted);
+  color: var(--text-secondary);
   padding: 16px 24px 32px;
   font-size: 0.805rem;
 }
@@ -228,7 +228,7 @@
 }
 
 .footer_link {
-  color: var(--foreground);
+  color: var(--text-primary);
   text-decoration: none;
   opacity: 0.85;
   transition: opacity 0.15s ease;
@@ -263,7 +263,7 @@
   gap: 0.75rem;
   margin: 0.75rem 0;
   font-size: 0.8125rem;
-  color: var(--text-muted, var(--foreground));
+  color: var(--text-secondary);
   opacity: 0.75;
 }
 
