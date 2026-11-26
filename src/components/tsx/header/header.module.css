@@ -190,21 +190,22 @@
 }
 
 .appheader_menu_container {
+  /* background-color: blue; */
   width: 100%;
   display: flex;
   align-items: center;
 }
 
 .appheader_wikilogo_container {
+  /* background-color: yellow; */
   height: 100%;
-  padding-inline: 10px;
 }
 
 .appheader_wikilogo {
   height: 100%;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   font-size: 24px;
   color: var(--foreground);
   text-decoration: none;
@@ -212,6 +213,7 @@
 }
 
 .appheader_profile_container {
+  /* background-color: green; */
   flex: 1;
   min-width: 0;
   height: 100%;
