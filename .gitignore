@@ -46,6 +46,5 @@ next-env.d.ts
 .eslintcache
 .turbo
 .swc
-.env*
 
 google-client.json
