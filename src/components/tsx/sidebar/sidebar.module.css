@@ -119,16 +119,19 @@
 
 .appsidebar_topper {
   padding-top: 10px;
+  padding-right: 10px;
   display: flex;
   justify-content: flex-end;
 }
 
 .appsidebar_topper_semi {
+  padding-right: 0;
   justify-content: center;
 }
 
 @media (min-width: 720px) and (max-width: 900px) {
-  .appsidebar_topper {
+  .appsidebar_topper.appsidebar_topper_semi {
+    padding-right: 0;
     justify-content: center;
   }
 }

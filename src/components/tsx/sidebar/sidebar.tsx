@@ -18,7 +18,7 @@ function AppSidebar() {
 
   const sidebarClass = [
     styles.appsidebar_container,
-    !isMobileDrawerOpen && !isExpanded ? styles.appsidebar_semi_expanded : "",
+    isSemi ? styles.appsidebar_semi_expanded : "",
     isMobileDrawerOpen ? styles.appsidebar_mobile_open : "",
   ]
     .filter(Boolean)
