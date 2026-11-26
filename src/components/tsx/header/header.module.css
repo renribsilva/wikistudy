@@ -34,7 +34,7 @@
 
 .dropdown_list {
   position: absolute;
-  top: calc(100% + 20px);
+  top: calc(100% + 25px);
   right: 0;
   width: max-content;
   min-width: 250px;
