@@ -9,7 +9,7 @@ import DropdownProfile from "./dropdown-profile";
 import Theme from "../buttons/theme-button";
 
 function AppHeader() {
-  const { isMobile } = useSidebar();
+  const { isMobile, isMobileOpen, toggleHeaderSidebar } = useSidebar();
   const { user } = useUser();
   const isAuthenticated = Boolean(user);
 
@@ -21,7 +21,11 @@ function AppHeader() {
         </div>
       )}
       <div className={styles.appheader_wikilogo_container}>
-        <Link href="/" className={styles.appheader_wikilogo}>
+        <Link
+          href="/"
+          className={styles.appheader_wikilogo}
+          onClick={isMobileOpen && toggleHeaderSidebar}
+        >
           WikiStudy
         </Link>
       </div>
