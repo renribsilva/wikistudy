@@ -74,11 +74,6 @@ export const SidebarProvider = ({ children }: { children: ReactNode }) => {
 
   const effectiveExpanded = isMobile ? false : isExpanded;
 
-  console.log("IsMobile", isMobile);
-  console.log("IsSemiMobile", isSemiMobile);
-  console.log("isExpanded", isExpanded);
-  console.log("isMobileOpen", isMobileOpen);
-
   return (
     <SidebarContext.Provider
       value={{
