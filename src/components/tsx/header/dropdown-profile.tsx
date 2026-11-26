@@ -128,6 +128,9 @@ function DropdownProfile({
                   className={styles.dropdown_google_button}
                   onClick={() => setIsOpen(false)}
                 />
+                <div className={styles.oauth_divider}>
+                  <span>ou</span>
+                </div>
                 <Link
                   href="/login"
                   className={styles.dropdown_auth_login}

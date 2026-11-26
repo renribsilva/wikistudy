@@ -338,3 +338,31 @@
 .dropdown_auth_signup:hover {
   opacity: 0.9;
 }
+
+.oauth_divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin: 0px;
+  width: 100%;
+  max-width: 400px;
+  font-size: 0.8125rem;
+  line-height: 1;
+  color: var(--text-muted, var(--foreground));
+}
+
+.oauth_divider span {
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.oauth_divider::before,
+.oauth_divider::after {
+  content: "";
+  flex: 1 1 0;
+  min-width: 12px;
+  height: 1px;
+  background-color: var(--border-button, currentColor);
+  opacity: 0.6;
+}
