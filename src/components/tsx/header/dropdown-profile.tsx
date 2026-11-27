@@ -12,6 +12,7 @@ import Home from "@/components/svg/home";
 import Theme from "../buttons/theme-button";
 import GoogleSignInButton from "../buttons/google-button";
 import Palette from "@/components/svg/palette";
+// import Public from "@/components/svg/public";
 
 interface DropdownProfileProps {
   isAuthenticated?: boolean;
@@ -111,6 +112,17 @@ function DropdownProfile({
                     <Palette width="20px" height="20px" />
                   </div>
                 </Link>
+                {/* <Link */}
+                {/*   href="/dashboard/account/colab" */}
+                {/*   className={styles.dropdown_list_button} */}
+                {/*   onClick={() => setIsOpen(false)} */}
+                {/* > */}
+                {/*   <div>Seja um colaborador</div> */}
+                {/*   <div className={styles.dropdown_list_icon}> */}
+                {/*     <Public width="20px" height="20px" /> */}
+                {/*   </div> */}
+                {/* </Link> */}
+                {/**/}
                 {isMobile && (
                   <div className={styles.dropdown_list_button}>
                     <div>Tema</div>

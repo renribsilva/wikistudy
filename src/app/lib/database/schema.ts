@@ -124,3 +124,72 @@ export const userPreferences = pgTable("user_preferences", {
   /** Data e hora da última atualização da preferência. */
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });
+
+/**
+ * Tabela `mediawiki_accounts` no PostgreSQL (via Drizzle ORM).
+ *
+ * Armazena as credenciais e o vínculo da conta de colaborador criada no
+ * MediaWiki para cada usuário da aplicação.
+ *
+ * @remarks
+ * - Relação 1:1 com `users` via `userId` (`unique()` + `onDelete: "cascade"`).
+ * - A coluna `mwPasswordEncrypted` deve armazenar a senha cifrada de forma
+ *   reversível (ex.: AES-256-GCM) no servidor para permitir autenticação
+ *   programática posterior na API do MediaWiki; nunca salve em texto puro.
+ * - Evite expor `mwPasswordEncrypted` em consultas públicas ou respostas de
+ *   API/Server Actions.
+ */
+export const mediawikiAccounts = pgTable("mediawiki_accounts", {
+  /** Identificador único do vínculo da conta MediaWiki (`UUID PRIMARY KEY`). */
+  id: uuid("id").defaultRandom().primaryKey(),
+
+  /** Referência única ao usuário (`users.id`) dono da conta na wiki; remove em cascata ao excluir o usuário. */
+  userId: uuid("user_id")
+    .notNull()
+    .unique()
+    .references(() => users.id, { onDelete: "cascade" }),
+
+  /** Nome de usuário da conta criada no MediaWiki. */
+  mwUsername: text("mw_username").notNull(),
+
+  /** Senha da conta MediaWiki cifrada no servidor (ex.: AES-256-GCM); nunca em texto puro. */
+  mwPasswordEncrypted: text("mw_password_encrypted").notNull(),
+
+  /** Data e hora de criação do registro (preenchida automaticamente pelo banco). */
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+/**
+ * Tabela `mediawiki_account_pending` no PostgreSQL (via Drizzle ORM).
+ *
+ * Armazena temporariamente as credenciais geradas e cifradas da conta MediaWiki
+ * antes da chamada `action=createaccount` e da gravação definitiva em
+ * `mediawiki_accounts`, permitindo recuperar a senha cifrada caso ocorra falha
+ * após a criação na wiki ou durante a vinculação.
+ *
+ * @remarks
+ * - Relação 1:1 com `users` via `userId` (`unique()` + `onDelete: "cascade"`).
+ * - A coluna `mwPasswordEncrypted` guarda a senha cifrada (ex.: AES-256-GCM);
+ *   nunca salve em texto puro e evite expor em respostas públicas.
+ * - Como o banco utiliza o driver `neon-http`, as operações com esta tabela
+ *   devem ser executadas de forma sequencial (sem `db.transaction`).
+ */
+export const mediawikiAccountPending = pgTable("mediawiki_account_pending", {
+  /** Identificador único do registro pendente (`UUID PRIMARY KEY`). */
+  id: uuid("id").defaultRandom().primaryKey(),
+
+  /** Referência única ao usuário (`users.id`) dono da conta pendente; remove em cascata ao excluir o usuário. */
+  userId: uuid("user_id")
+    .notNull()
+    .unique()
+    .references(() => users.id, { onDelete: "cascade" }),
+
+  /** Nome de usuário normalizado/canônico reservado para a conta no MediaWiki. */
+  mwUsername: text("mw_username").notNull(),
+
+  /** Senha gerada para a conta MediaWiki cifrada no servidor (ex.: AES-256-GCM); nunca em texto puro. */
+  mwPasswordEncrypted: text("mw_password_encrypted").notNull(),
+
+  /** Data e hora de criação do registro pendente (preenchida automaticamente pelo banco). */
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
