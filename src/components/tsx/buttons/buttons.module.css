@@ -242,6 +242,22 @@
   opacity: var(--google-hover-opacity);
 }
 
+.gsi-material-button,
+.gsi-material-button:link,
+.gsi-material-button:visited,
+.gsi-material-button:hover,
+.gsi-material-button:active,
+.gsi-material-button:focus {
+  text-decoration: none !important;
+  -webkit-text-decoration: none !important;
+}
+
+.gsi-material-button .gsi-material-button-contents {
+  text-decoration: none !important;
+  -webkit-text-decoration: none !important;
+  /* ...resto das suas regras... */
+}
+
 /*****************************************/
 /***************MENU_BUTTON**************/
 /*****************************************/

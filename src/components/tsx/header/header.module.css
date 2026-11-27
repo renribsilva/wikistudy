@@ -282,20 +282,27 @@
 
 .dropdown_auth_login,
 .dropdown_auth_signup {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 100%;
   max-width: 400px;
-  padding: 8px 12px;
+  min-height: 38px;
+  padding: 0 1rem;
   border-radius: 8px;
   font-size: 14px;
   font-weight: 600;
+  line-height: 1;
   text-decoration: none;
   box-sizing: border-box;
   transition:
     opacity 0.15s ease,
     background-color 0.15s ease;
+}
+
+.dropdown_auth_login > *,
+.dropdown_auth_signup > * {
+  transform: translateY(-0.75px);
 }
 
 /* Botão secundário (Entrar) */

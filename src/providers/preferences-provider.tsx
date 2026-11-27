@@ -21,15 +21,20 @@ export function PreferencesProvider({
   preferences: ContextPreferences | null;
   children: React.ReactNode;
 }) {
-  const { setTheme } = useTheme();
+  const { theme, setTheme } = useTheme();
   const initialized = useRef(false);
 
   useEffect(() => {
     if (initialized.current) return;
 
+    const serverTheme = preferences?.theme;
+    if (!serverTheme) return;
+
     initialized.current = true;
-    setTheme(preferences?.theme ?? "system");
-  }, [preferences?.theme, setTheme]);
+    if (theme !== serverTheme) {
+      setTheme(serverTheme);
+    }
+  }, [preferences?.theme, theme, setTheme]);
 
   return (
     <PreferencesContext.Provider value={{ preferences }}>

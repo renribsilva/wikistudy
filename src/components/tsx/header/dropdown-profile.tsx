@@ -142,20 +142,19 @@ function DropdownProfile({
                 <div className={styles.oauth_divider}>
                   <span>ou</span>
                 </div>
-
                 <Link
                   href="/login"
                   className={styles.dropdown_auth_login}
                   onClick={() => setIsOpen(false)}
                 >
-                  Entrar
+                  <span className={styles.auth_label}>Entrar</span>
                 </Link>
                 <Link
                   href="/signup"
                   className={styles.dropdown_auth_signup}
                   onClick={() => setIsOpen(false)}
                 >
-                  Criar conta
+                  <span className={styles.auth_label}>Criar conta</span>
                 </Link>
               </div>
               {isMobile && (

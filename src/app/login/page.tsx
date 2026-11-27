@@ -7,6 +7,7 @@ import { login } from "@/app/lib/auth/actions";
 import styles from "./login.module.css";
 import { PasswordInput } from "@/components/tsx/password-input";
 import GoogleSignInButton from "@/components/tsx/buttons/google-button";
+import SubmitButton from "@/components/tsx/buttons/submit-button";
 
 const OAUTH_ERROR_MESSAGES: Record<string, string> = {
   google_denied: "O login com Google foi cancelado.",
@@ -84,13 +85,12 @@ function LoginContent() {
           {state?.message && (
             <p className={styles.form_alert}>{state.message}</p>
           )}
-          <button
-            type="submit"
-            disabled={pending}
+          <SubmitButton
+            pending={pending}
+            label="Entrar"
+            pendingLabel="Entrando..."
             className={styles.submit_button}
-          >
-            {pending ? "Entrando..." : "Entrar"}
-          </button>
+          />
         </form>
 
         <p className={styles.legal_notice}>

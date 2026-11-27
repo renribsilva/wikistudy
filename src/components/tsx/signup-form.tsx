@@ -6,6 +6,7 @@ import { signup } from "@/app/lib/auth/actions";
 import styles from "./components.module.css";
 import { PasswordInput } from "./password-input";
 import GoogleSignInButton from "@/components/tsx/buttons/google-button";
+import SubmitButton from "@/components/tsx/buttons/submit-button";
 
 const OAUTH_ERROR_MESSAGES: Record<string, string> = {
   google_denied: "O login com Google foi cancelado.",
@@ -99,13 +100,12 @@ export default function SignupForm() {
 
         {state?.message && <p className={styles.form_alert}>{state.message}</p>}
 
-        <button
-          disabled={pending}
-          type="submit"
+        <SubmitButton
+          pending={pending}
+          label="Cadastrar"
+          pendingLabel="Cadastrando..."
           className={styles.submit_button}
-        >
-          {pending ? "Cadastrando..." : "Cadastrar"}
-        </button>
+        />
       </form>
     </div>
   );
