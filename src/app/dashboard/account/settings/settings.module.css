@@ -1,4 +1,4 @@
-.container {
+.settings_container {
   max-width: 720px;
   margin: 0 auto;
   padding: 2rem 1.25rem;
@@ -7,20 +7,20 @@
   gap: 1.5rem;
 }
 
-.title {
+.settings_title {
   margin: 0;
   font-size: 1.65rem;
   font-weight: 600;
   line-height: 1.25;
 }
 
-.subtitle {
+.settings_subtitle {
   margin: 0;
   font-size: 0.95rem;
   opacity: 0.8;
 }
 
-.section {
+.settings_section {
   display: flex;
   flex-direction: column;
   gap: 20px;

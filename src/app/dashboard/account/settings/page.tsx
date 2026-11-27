@@ -27,18 +27,24 @@ export default async function AccountSettingsPage() {
   const initialFace = user.avatarFace ?? DEFAULT_AVATAR_FACE;
 
   return (
-    <main className={styles.container} aria-labelledby="account-settings-title">
-      <header className={styles.header}>
+    <main
+      className={styles.settings_container}
+      aria-labelledby="account-settings-title"
+    >
+      <header className={styles.settings_header}>
         <div>
-          <h1 id="account-settings-title" className={styles.title}>
+          <h1 id="account-settings-title" className={styles.settings_title}>
             Configurações da conta
           </h1>
-          <p className={styles.subtitle}>
+          <p className={styles.settings_subtitle}>
             Gerencie as preferências visuais da sua conta.
           </p>
         </div>
       </header>
-      <section className={styles.section} aria-label="Personalização do perfil">
+      <section
+        className={styles.settings_section}
+        aria-label="Personalização do perfil"
+      >
         <NameFormCard initialName={user.name} onSave={updateUserName} />
         <FaceSelectorCard
           initialFace={initialFace}

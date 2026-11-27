@@ -105,23 +105,29 @@
 }
 
 .theme_selector_swatches {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(76px, 1fr));
-  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
   overflow: hidden;
+  border-radius: 10px;
   border: 1px solid var(--border-button);
 }
 
 .theme_selector_swatch {
   display: flex;
   flex-direction: column;
+  flex: 1 1 0px;
+  width: 0;
   min-width: 0;
+  overflow: hidden;
 }
 
 .theme_selector_swatch_square {
   width: 100%;
-  aspect-ratio: 3 / 4;
-  max-height: 76px;
+  height: 56px;
   flex-shrink: 0;
 }
 
@@ -129,7 +135,9 @@
   display: flex;
   flex-direction: column;
   gap: 2px;
-  padding: 0.45rem 0.5rem;
+  padding: 0.4rem 0.25rem;
+  min-width: 0;
+  overflow: hidden;
   background-color: var(--background-secondary);
 }
 
