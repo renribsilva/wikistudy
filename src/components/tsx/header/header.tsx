@@ -4,9 +4,9 @@ import styles from "./header.module.css";
 import Link from "next/link";
 import { useSidebar } from "@/providers/sidebar-provider";
 import { useUser } from "@/providers/user-provider";
-import MenuButton from "./menu-button";
 import DropdownProfile from "./dropdown-profile";
 import Theme from "../buttons/theme-button";
+import MenuButton from "../buttons/menu-button";
 
 function AppHeader() {
   const { isMobile, isMobileOpen, toggleHeaderSidebar } = useSidebar();

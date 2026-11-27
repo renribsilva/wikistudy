@@ -258,30 +258,6 @@
   }
 }
 
-/*****************************************/
-/***************MENU_BUTTON**************/
-/*****************************************/
-
-.menu_button {
-  background-color: transparent;
-  color: var(--text-secondary);
-  border: none;
-  height: 35px;
-  border-radius: 99px;
-  width: 35px;
-  padding: 0;
-  line-height: 0;
-  cursor: pointer;
-  transition:
-    background-color 0.15s ease,
-    color 0.15s ease;
-}
-
-.menu_button:hover {
-  background-color: color-mix(in srgb, var(--text-primary) 6%, transparent);
-  color: var(--text-primary);
-}
-
 /*************************************************/
 /***************DROPDOWN AUTH ACTION**************/
 /*************************************************/

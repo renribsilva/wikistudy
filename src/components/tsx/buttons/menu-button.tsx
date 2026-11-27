@@ -1,7 +1,7 @@
 "use client";
 
 import { useSidebar } from "@/providers/sidebar-provider";
-import styles from "./header.module.css";
+import styles from "./buttons.module.css";
 import Menu from "@/components/svg/menu";
 
 function MenuButton() {
