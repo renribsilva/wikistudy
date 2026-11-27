@@ -14,7 +14,7 @@ import {
   encryptEmail,
 } from "./email-crypto";
 import { FormState, LoginFormSchema, SignupFormSchema } from "./definitions";
-import { sendPasswordResetEmail } from "../helpers/send-password-to-email";
+import { sendPasswordResetEmail } from "../resend/send-password-to-email";
 
 const ForgotPasswordSchema = z.object({
   email: z

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { LegalNavItem } from "./legal-nav";
 import styles from "./legal.module.css";
 
+/** Seção estruturada exibida na navegação e no corpo da Política de Cookies. */
 export interface CookieSectionItem extends LegalNavItem {
   intro?: React.ReactNode;
   paragraphs: readonly React.ReactNode[];
@@ -11,13 +12,25 @@ export interface CookieSectionItem extends LegalNavItem {
   hasTopDivider?: boolean;
 }
 
+/** Propriedades aceitas pelo componente `CookiePolicy`. */
 export interface CookiePolicyProps {
+  /** Data de publicação ou última revisão exibida no cabeçalho. */
   lastUpdated?: string;
+  /** Endereço de e-mail ou canal de contato para dúvidas de privacidade. */
   contactEmail?: string;
+  /** Rota interna para a Política de Privacidade. */
   privacyUrl?: string;
+  /** Rota interna para os Termos de Serviço. */
   tosUrl?: string;
 }
 
+/**
+ * Monta as seções da Política de Cookies alinhadas ao comportamento atual
+ * da sessão (`session` com validade máxima de 24h) e aos serviços externos.
+ *
+ * @param params - Parâmetros de contato utilizados na redação das seções.
+ * @returns Lista imutável de seções renderizadas no documento.
+ */
 export function buildCookiesItems({
   contactEmail = "[E-mail de contato / canal de privacidade]",
 }: Pick<CookiePolicyProps, "contactEmail">): readonly CookieSectionItem[] {
@@ -39,8 +52,9 @@ export function buildCookiesItems({
       label: "2. Cookies Utilizados",
       intro: (
         <Fragment key="2-intro">
-          O <strong>WikiStudy</strong> utiliza apenas um cookie essencial para
-          manter sua sessão ativa nas áreas que exigem login:
+          O <strong>WikiStudy</strong> define apenas um cookie essencial próprio
+          (<code>session</code>) para manter sua sessão autenticada nas áreas
+          restritas após o login.
         </Fragment>
       ),
       hasTable: true,
@@ -57,9 +71,11 @@ export function buildCookiesItems({
           ou rastreamento de marketing.
         </Fragment>,
         <Fragment key="3.2">
-          <strong>Serviços externos (YouTube):</strong> links ou players do
-          YouTube podem aplicar cookies ou tecnologias próprias do
-          YouTube/Google de acordo com as políticas deles.
+          <strong>Conteúdos e serviços externos (YouTube):</strong> links
+          externos não definem cookies por si só, mas players incorporados ou
+          recursos do YouTube/Google podem definir cookies ou tecnologias
+          próprias quando carregados ou utilizados, de acordo com as políticas
+          deles.
         </Fragment>,
       ],
     },
@@ -86,14 +102,18 @@ export function buildCookiesItems({
       paragraphs: [
         <Fragment key="5.1">
           Esta Política de Cookies pode ser atualizada quando houver mudanças na
-          forma como o site gerencia sessões ou cookies. Veja sempre a data de{" "}
-          <strong>Última atualização</strong> no topo.
+          forma como o site gerencia sessões, cookies ou integrações de
+          terceiros. Veja sempre a data de <strong>Última atualização</strong>{" "}
+          no topo.
         </Fragment>,
       ],
     },
   ];
 }
 
+/**
+ * Renderiza a tabela descritiva do cookie essencial utilizado pela plataforma.
+ */
 function CookiesTable() {
   return (
     <div className={styles.table_wrapper}>
@@ -117,8 +137,11 @@ function CookiesTable() {
               pessoais na plataforma.
             </td>
             <td>
-              Dura enquanto a sessão do navegador estiver aberta ou até você
-              clicar em sair (<code>logout</code>).
+              Configurado como cookie de sessão com validade máxima de 24 horas
+              (podendo ser renovado durante o uso). É encerrado ao clicar em
+              sair (<code>logout</code>), ao expirar o prazo ou ao fechar o
+              navegador — exceto se o navegador restaurar sessões abertas
+              anteriormente.
             </td>
           </tr>
         </tbody>
@@ -127,6 +150,12 @@ function CookiesTable() {
   );
 }
 
+/**
+ * Componente da Política de Cookies do WikiStudy com cabeçalho legal,
+ * links para documentos relacionados e seções navegáveis por âncora.
+ *
+ * @param props - Dados de atualização, contato e rotas legais.
+ */
 export function CookiePolicy({
   lastUpdated = "[DD/MM/AAAA]",
   contactEmail = "[E-mail de contato / canal de privacidade]",
