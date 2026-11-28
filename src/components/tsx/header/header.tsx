@@ -37,6 +37,7 @@ function AppHeader() {
             userName={user?.name}
             userEmail={user?.email}
             avatarFace={user?.avatarFace}
+            userRole={user?.role}
           />
         </div>
       </div>

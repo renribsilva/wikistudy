@@ -40,6 +40,7 @@
   border-radius: 10px;
   border: 1px solid var(--border-button);
   background: transparent;
+  color: var(--text-primary);
   cursor: pointer;
   transition:
     transform 0.12s ease,
@@ -219,4 +220,52 @@
   border: 1px solid #dc2626;
   color: #dc2626;
   font-size: 0.875rem;
+}
+
+/**********************************************/
+/*****************ACCESS LEVEL******************/
+/**********************************************/
+
+.role_card {
+  background-color: var(--background-secondary);
+  border: 1px solid var(--border-button);
+  border-radius: 12px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.role_heading {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.role_description {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.role_actions {
+  display: flex;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.role_button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-button);
+  background: transparent;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
 }

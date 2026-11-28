@@ -9,10 +9,9 @@ const authRoutes: string[] = ["/login", "/signup"];
 
 /**
  * Lista explícita de rotas protegidas que exigem sessão autenticada
- * (`session.userId`). Pode conter rotas exatas ou prefixos de subrotas (ex.:
- * `/account/settings` ou `/account`).
+ * (`session.userId`). Pode conter rotas exatas ou prefixos de subrotas.
  */
-const protectedRoutes: string[] = ["/account"];
+const protectedRoutes: string[] = ["/dashboard/account"];
 
 /**
  * Verifica se o caminho informado corresponde a alguma rota configurada em

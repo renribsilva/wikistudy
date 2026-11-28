@@ -6,6 +6,8 @@ import styles from "./buttons.module.css";
 
 interface CreateWikiAccountButtonProps {
   initialMwUsername?: string | null;
+  storedMwUsername?: string | null;
+  canReactivate?: boolean;
 }
 
 type StepPhase =
@@ -22,8 +24,14 @@ const PHASE_MESSAGES: Record<Exclude<StepPhase, "idle">, string> = {
     "Salvando vínculo, atualizando permissões e sincronizando a página...",
 };
 
+function formatActiveOkMessage(username: string | null): string {
+  return username ? `Conta ativa: ${username}` : "Conta ativa";
+}
+
 export function CreateWikiAccountButton({
   initialMwUsername = null,
+  storedMwUsername = null,
+  canReactivate = false,
 }: CreateWikiAccountButtonProps) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -32,7 +40,7 @@ export function CreateWikiAccountButton({
     initialMwUsername,
   );
   const [statusMessage, setStatusMessage] = useState<string | null>(
-    initialMwUsername ? `Conta ativa na WikiStudy: ${initialMwUsername}` : null,
+    initialMwUsername ? formatActiveOkMessage(initialMwUsername) : null,
   );
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
@@ -55,7 +63,7 @@ export function CreateWikiAccountButton({
     setErrorMessage(null);
     if (initialMwUsername) {
       setMwUsername(initialMwUsername);
-      setStatusMessage(`Conta ativa na WikiStudy: ${initialMwUsername}`);
+      setStatusMessage(formatActiveOkMessage(initialMwUsername));
     } else {
       setMwUsername(null);
       setStatusMessage(null);
@@ -67,7 +75,6 @@ export function CreateWikiAccountButton({
     setPhase("waking_or_token");
     setStatusMessage(PHASE_MESSAGES.waking_or_token);
 
-    // Estimativa visual para refletir os dois passos do backend (token -> createaccount)
     const t1 = window.setTimeout(() => {
       setPhase("creating_account");
       setStatusMessage(PHASE_MESSAGES.creating_account);
@@ -97,6 +104,52 @@ export function CreateWikiAccountButton({
     return "Não foi possível concluir a operação na WikiStudy.";
   }
 
+  async function handleReactivate() {
+    if (loading) return;
+
+    setLoading(true);
+    setErrorMessage(null);
+    setStatusMessage("Reativando acesso de colaborador...");
+
+    try {
+      const res = await fetch("/api/mediawiki/reactivate-account", {
+        method: "POST",
+        cache: "no-store",
+      });
+
+      const data = await res.json().catch(() => null);
+
+      if (!res.ok || data?.ok !== true) {
+        setStatusMessage(null);
+        setErrorMessage(
+          resolveFriendlyError(
+            res.status,
+            typeof data?.error === "string" ? data.error : undefined,
+          ),
+        );
+        return;
+      }
+
+      const nextUsername =
+        typeof data?.mwUsername === "string" && data.mwUsername.trim()
+          ? data.mwUsername.trim()
+          : storedMwUsername;
+
+      if (nextUsername) {
+        setMwUsername(nextUsername);
+      }
+      setStatusMessage(formatActiveOkMessage(nextUsername));
+      router.refresh();
+    } catch {
+      setStatusMessage(null);
+      setErrorMessage(
+        "Falha de rede ao conectar com o servidor. Verifique sua conexão e tente novamente.",
+      );
+    } finally {
+      setLoading(false);
+    }
+  }
+
   async function handleCreateAccount() {
     if (loading) return;
 
@@ -121,9 +174,7 @@ export function CreateWikiAccountButton({
       } catch {
         clearPhaseTimers();
         setPhase("idle");
-        setStatusMessage(
-          mwUsername ? `Conta ativa na WikiStudy: ${mwUsername}` : null,
-        );
+        setStatusMessage(mwUsername ? formatActiveOkMessage(mwUsername) : null);
         setErrorMessage(
           `Resposta inesperada do servidor (HTTP ${res.status}). Tente novamente.`,
         );
@@ -135,14 +186,12 @@ export function CreateWikiAccountButton({
           ? data.mwUsername.trim()
           : typeof data?.username === "string" && data.username.trim()
             ? data.username.trim()
-            : null;
+            : mwUsername;
 
       if (!res.ok || data?.ok !== true) {
         clearPhaseTimers();
         setPhase("idle");
-        setStatusMessage(
-          mwUsername ? `Conta ativa na WikiStudy: ${mwUsername}` : null,
-        );
+        setStatusMessage(mwUsername ? formatActiveOkMessage(mwUsername) : null);
         setErrorMessage(resolveFriendlyError(res.status, data?.error));
         return;
       }
@@ -152,27 +201,14 @@ export function CreateWikiAccountButton({
 
       if (resolvedUsername) {
         setMwUsername(resolvedUsername);
-
-        setStatusMessage(
-          data?.authenticated === true
-            ? `Autenticação confirmada no MediaWiki: ${resolvedUsername}`
-            : resolvedUsername
-              ? data?.alreadyExists
-                ? `Conta já vinculada na WikiStudy: ${resolvedUsername}`
-                : `Conta criada na WikiStudy: ${resolvedUsername}`
-              : "Conta vinculada na WikiStudy com sucesso.",
-        );
-      } else {
-        setStatusMessage("Conta vinculada na WikiStudy com sucesso.");
       }
+      setStatusMessage(formatActiveOkMessage(resolvedUsername));
 
       router.refresh();
     } catch {
       clearPhaseTimers();
       setPhase("idle");
-      setStatusMessage(
-        mwUsername ? `Conta ativa na WikiStudy: ${mwUsername}` : null,
-      );
+      setStatusMessage(mwUsername ? formatActiveOkMessage(mwUsername) : null);
       setErrorMessage(
         "Falha de rede ao conectar com o servidor. Verifique sua conexão e tente novamente.",
       );
@@ -184,20 +220,26 @@ export function CreateWikiAccountButton({
   }
 
   const buttonLabel = loading
-    ? phase === "waking_or_token"
-      ? "Conectando à wiki..."
-      : phase === "creating_account"
-        ? "Criando conta..."
-        : "Sincronizando..."
-    : mwUsername
-      ? "Verificar conta na WikiStudy"
-      : "Criar conta na WikiStudy";
+    ? canReactivate
+      ? "Reativando..."
+      : phase === "waking_or_token"
+        ? "Conectando à wiki..."
+        : phase === "creating_account"
+          ? "Criando conta..."
+          : "Sincronizando..."
+    : canReactivate
+      ? storedMwUsername
+        ? `Reativar conta (${storedMwUsername})`
+        : "Reativar conta"
+      : mwUsername
+        ? "Verificar conta na MediaWiki"
+        : "Criar conta na MediaWiki";
 
   return (
     <div className={styles.colab_button_wrapper}>
       <button
         type="button"
-        onClick={handleCreateAccount}
+        onClick={canReactivate ? handleReactivate : handleCreateAccount}
         disabled={loading}
         aria-busy={loading}
         className={`${styles.colab_button_button} ${styles.submit_anim_button}`}

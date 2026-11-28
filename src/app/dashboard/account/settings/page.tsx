@@ -8,6 +8,7 @@ import styles from "./settings.module.css";
 import { FaceSelectorCard } from "@/components/tsx/settings/face-selector";
 import { NameFormCard } from "@/components/tsx/settings/name-form";
 import { DeleteAccountCard } from "@/components/tsx/settings/delete-account";
+import { AccessLevelCard } from "@/components/tsx/settings/acess-level";
 
 export const metadata: Metadata = {
   title: "Configurações da conta | WikiStudy",
@@ -46,6 +47,7 @@ export default async function AccountSettingsPage() {
         aria-label="Personalização do perfil"
       >
         <NameFormCard initialName={user.name} onSave={updateUserName} />
+        <AccessLevelCard role={user.role} />
         <FaceSelectorCard
           initialFace={initialFace}
           defaultFace={DEFAULT_AVATAR_FACE}

@@ -12,13 +12,14 @@ import Home from "@/components/svg/home";
 import Theme from "../buttons/theme-button";
 import GoogleSignInButton from "../buttons/google-button";
 import Palette from "@/components/svg/palette";
-// import Public from "@/components/svg/public";
+import Public from "@/components/svg/public";
 
 interface DropdownProfileProps {
   isAuthenticated?: boolean;
   userName?: string | null;
   userEmail?: string | null;
   avatarFace?: number | string | null;
+  userRole?: string | null;
 }
 
 function DropdownProfile({
@@ -26,6 +27,7 @@ function DropdownProfile({
   userName,
   userEmail,
   avatarFace,
+  userRole,
 }: DropdownProfileProps) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -53,6 +55,13 @@ function DropdownProfile({
     }
     setIsOpen((prev) => !prev);
   };
+
+  // Só exibe quando autenticado e com role explícita diferente de "colab" e "admin"
+  const canBecomeCollaborator =
+    isAuthenticated &&
+    userRole != null &&
+    userRole !== "colab" &&
+    userRole !== "admin";
 
   return (
     <div className={styles.dropdown_container} ref={dropdownRef}>
@@ -112,17 +121,18 @@ function DropdownProfile({
                     <Palette width="20px" height="20px" />
                   </div>
                 </Link>
-                {/* <Link */}
-                {/*   href="/dashboard/account/colab" */}
-                {/*   className={styles.dropdown_list_button} */}
-                {/*   onClick={() => setIsOpen(false)} */}
-                {/* > */}
-                {/*   <div>Seja um colaborador</div> */}
-                {/*   <div className={styles.dropdown_list_icon}> */}
-                {/*     <Public width="20px" height="20px" /> */}
-                {/*   </div> */}
-                {/* </Link> */}
-                {/**/}
+                {canBecomeCollaborator && (
+                  <Link
+                    href="/dashboard/account/colab"
+                    className={styles.dropdown_list_button}
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <div>Seja um colaborador</div>
+                    <div className={styles.dropdown_list_icon}>
+                      <Public width="20px" height="20px" />
+                    </div>
+                  </Link>
+                )}
                 {isMobile && (
                   <div className={styles.dropdown_list_button}>
                     <div>Tema</div>

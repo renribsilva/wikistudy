@@ -286,10 +286,44 @@
 /***************COLAB BUTTON**************/
 /*****************************************/
 
+@keyframes colabPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0
+      color-mix(in srgb, var(--accent, currentColor) 28%, transparent);
+    transform: translateY(0);
+  }
+  50% {
+    box-shadow: 0 0 0 6px
+      color-mix(in srgb, var(--accent, currentColor) 0%, transparent);
+    transform: translateY(-1px);
+  }
+}
+
+@keyframes colabSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.button_spinner {
+  display: inline-block;
+  flex-shrink: 0;
+  width: 14px;
+  height: 14px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: colabSpin 0.8s linear infinite;
+}
+
 .colab_button_wrapper {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: 0.75rem;
+  width: 100%;
+  min-width: 0;
 }
 
 .colab_button_button {
@@ -297,6 +331,7 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
+  min-width: 235px;
   height: 40px;
   padding: 0 16px;
   border-radius: 8px;
@@ -305,6 +340,7 @@
   color: var(--background);
   font-size: 0.875rem;
   font-weight: 500;
+  white-space: nowrap;
   cursor: pointer;
   transition:
     opacity 0.15s ease,
@@ -330,14 +366,67 @@
   cursor: not-allowed;
 }
 
-.colab_button_status_success {
+.colab_button_status_success,
+.colab_button_status_error {
   margin: 0;
   font-size: 0.875rem;
+  line-height: 1.4;
+  min-height: 2.8em;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+.colab_button_status_success {
   color: var(--foreground);
 }
 
 .colab_button_status_error {
+  color: #dc2626;
+}
+
+/******************************************/
+/***************UNLINK BUTTON**************/
+/******************************************/
+
+.unlink_wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.unlink_btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 38px;
+  padding: 0 16px;
+  border-radius: 8px;
+  border: 1px solid var(--border-button);
+  background-color: var(--background);
+  color: inherit;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    opacity 0.15s ease;
+}
+
+.unlink_btn:hover:not(:disabled) {
+  background-color: var(--background-secondary);
+}
+
+.unlink_btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.unlink_error {
   margin: 0;
   font-size: 0.875rem;
-  color: #dc2626;
+  line-height: 1.45;
+  color: var(--text-muted);
+  overflow-wrap: anywhere;
 }
